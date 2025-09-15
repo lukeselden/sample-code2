@@ -3016,7 +3016,6 @@ function Get-RevUser
     }
     process {
         $request = @{
-            Method = "Get";
             Endpoint = "/api/v2/users/$userId";
             Body = @{};
         };
