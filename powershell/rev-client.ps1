@@ -3,7 +3,7 @@
     VBrick Rev Client
 .DESCRIPTION
     VBrick Rev Client
-    Built 2024-10-07
+    Built 2025-09-15
     DISCLAIMER:
         This script is not an officially supported Vbrick product, and is provided AS-IS.
 
@@ -2177,6 +2177,11 @@ function Wait-RevTranscode
         [hashtable]
         $RequestArgs = @{},
 
+        # Check if video has instances, not just the processing progress
+        [Parameter()]
+        [switch]
+        $CheckInstances,
+
         # The Rev Client instance to use. If not defined use default one for this session
         [Parameter()]
         [RevClient]
@@ -2263,9 +2268,29 @@ function Wait-RevTranscode
 
                     try {
                         # get-revvideostatus in rev-client-additional-cmdlets
-                        $status = Invoke-Rev -Method Get -Endpoint "/api/v2/videos/$currentId/status" -RequestArgs $RequestArgs -Client $Client
-                        $videoData.status = $status;
+                        $status = if ($CheckInstances) {
+                            Get-RevVideoDetails -VideoId $currentId -Client $Client -RequestArgs $RequestArgs;
+                        } else {
+                            Invoke-Rev -Method Get -Endpoint "/api/v2/videos/$currentId/status" -RequestArgs $RequestArgs -Client $Client
+                        }
 
+                        if ($CheckInstances) {
+                            if ($status.instances | ? { $_.status -eq 'Initialized' -and -not $_.isOriginalInstance }) {
+                                $status.isProcessing = $true;
+                                $status.overallProgress = 0;
+                                $status.status = 'PendingReTranscode';
+                            }
+                            $videoData.status = @{
+                                videoId = $currentId;
+                                status = $status.status;
+                                isProcessing = $status.isProcessing;
+                                overallProgress = $status.overallProgress;
+                            }
+                        } else {
+                            $videoData.status = $status;
+                            $videoData.status.videoId = $currentId;
+                        }
+                        $videoData.status.isProcessing = $status.isProcessing;
                         if ($status.overallProgress -eq 1 -and -not $status.isProcessing -or $status.status -eq 'ProcessingFailed') {
                             $videoData.isComplete = $true;
                         }
