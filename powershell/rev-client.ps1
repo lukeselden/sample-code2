@@ -151,6 +151,10 @@ class RevMetadataAttribute : Attribute
                 $value = [RevClient]::ISODate($value);
             }
 
+            if ($value -is [System.Management.Automation.SwitchParameter]) {
+                $value = [bool]($value.IsPresent);
+            }
+
             if (-not $subKey) {
                 # Workaround for if RequestArgs and body are defined
                 if ($Payload.$metaKey -is [hashtable] -and $value -is [hashtable]) {
