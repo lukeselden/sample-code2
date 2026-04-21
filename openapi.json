@@ -5168,6 +5168,115 @@
         }
       }
     },
+    "/capture": {
+      "get": {
+        "tags": [
+          "Videos"
+        ],
+        "summary": "Capture Video",
+        "description": "Create screen share and webcam recordings directly from your browser. This API is meant to be called from a frontend application that can render HTML based content. Users are authorized by passing in a Vbrick access token in the url.",
+        "operationId": "captureVideo",
+        "parameters": [
+          {
+            "name": "tk",
+            "in": "query",
+            "description": "Access token for authorization.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized error"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+        "/api/v2/videos/{videoId}/lms-export/scorm": {
+      "get": {
+        "tags": [
+          "Videos"
+        ],
+        "summary": "Download Video LMS SCORM Package",
+        "description": "Downloads a SCORM package based on the video Id provided. This endpoint requires edit and lms export rights for the video.",
+        "operationId": "downloadVideoLmsScormPackage",
+        "x-sdk-method-name": "downloadLmsScormPackage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/authorizationParam"
+          },
+          {
+            "name": "videoId",
+            "in": "path",
+            "description": "Id of video",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "completionPercentage",
+            "in": "query",
+            "description": "If a completionPercentage is supplied, video will be marked as complete in lms after the specified percent watched is hit.",
+            "schema": {
+              "type": "integer",
+              "default": 80,
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "allowSpeedChanges",
+            "in": "query",
+            "description": "If allowSpeedChanges is supplied as true, user will be allowed to change playback speed.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error <p>Returned if videoId not valid</p>"
+          },
+          "404": {
+            "description": "Resource not found <p>Returned if videoId not provided</p>"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/api/v2/playlists": {
       "get": {
         "tags": [
@@ -11933,6 +12042,276 @@
         }
       }
     },
+    "/api/v2/devices/{deviceId}/logs": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Get Device Logs",
+        "description": "Get a list of logs for a specific device. <p>The actionName parameter represents the type of device log entry. For example,  DME actionName parameters are equivalent to the Activity entry within the DME Server Log display. (Which can be found at the DME Management > Actions > View Logs).</p><p>For use with the API, the parameter should be formatted in Pascal case. This applies to LDAP devices as well.  A few of the more common activities are displayed in the dropdown below.</p>",
+        "operationId": "getDeviceLogs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/authorizationParam"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "Id of device to query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Type of status for device logs to filter.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/deviceLogStatus"
+            }
+          },
+          {
+            "name": "actionName",
+            "in": "query",
+            "description": "Type of device actions to filter logs.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Filter date for those recorded credits that happened on or after the WHEN field.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "Filter date for those recorded device logs that happened on or before the WHEN field.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+              "name": "sortDirection",
+              "in": "query",
+              "description": "If provided, query results are sorted on ascending or descending order (asc, desc). The Default is desc.",
+              "required": false,
+              "schema": {
+                "$ref": "#/components/schemas/sortDirection"
+              }
+          },
+          {
+              "name": "count",
+              "in": "query",
+              "description": "If provided, limits the number of results returned.",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              }
+          },
+          {
+              "name": "scrollId",
+              "in": "query",
+              "description": "The scrollId returned in first request to search. This can be passed in subsequent requests to fetch next set of results. This is forward only and you cannot get back the search results that are scrolled once.",
+              "schema": {
+                "type": "string"
+              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deviceLogsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/v2/devices/dmes/{deviceId}/prepositioned-videos": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Preposition Videos to Specified DMEs",
+        "description": "This API allows account administrators to initiate and manage targeted video downloads to specific DMEs. Using a single API call, users can send one or more video instances (from the same videoID) to designated DMEs for prepositioning, regardless of the DME’s preposition settings.",
+        "operationId": "prepositionVideoInstancesToDme",
+        "x-sdk-method-name": "prepositionVideoInstancesToDme",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/authorizationParam"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "Id of device to which videos will be prepositioned.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/dmePrepositionVideos"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/dmePrepositionVideosResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/v2/devices/accounts/{accountId}/logs": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Get Device Logs for an Account",
+        "description": "Get a list of logs for a specific account's devices. <p>The actionName parameter represents the type of device log entry. For example,  DME actionName parameters are equivalent to the Activity entry within the DME Server Log display. (Which can be found at the DME Management > Actions > View Logs).</p><p>For use with the API, the parameter should be formatted in Pascal case. This applies to LDAP devices as well.  A few of the more common activities are displayed in the dropdown below.</p>",
+        "operationId": "getAccountDeviceLogs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/authorizationParam"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "Account Id to get the device logs",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Type of status for device logs to filter.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "actionName",
+            "in": "query",
+            "description": "Type of device actions to filter logs.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Filter date for those recorded credits that happened on or after the WHEN field.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "Filter date for those recorded device logs that happened on or before the WHEN field.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+              "name": "sortDirection",
+              "in": "query",
+              "description": "If provided, query results are sorted on ascending or descending order (asc, desc). The Default is desc.",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+          },
+          {
+              "name": "count",
+              "in": "query",
+              "description": "If provided, limits the number of results returned.",
+              "schema": {
+                "type": "integer"
+              }
+          },
+          {
+              "name": "scrollId",
+              "in": "query",
+              "description": "The scrollId returned in first request to search. This can be passed in subsequent requests to fetch next set of results. This is forward only and you cannot get back the search results that are scrolled once.",
+              "schema": {
+                "type": "string"
+              }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accountDeviceLogsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized error",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {}
+          }
+        }
+      }
+    },
     "/network/audit/accounts/{accountId}/userAccess": {
       "get": {
         "tags": [
@@ -13353,6 +13732,21 @@
           "sensitiveContent": {
             "type": "boolean",
             "description": "This will prevent sensitive content from being indexed in Elastic Search."
+          },
+          "domainAllowlistEnabled": {
+            "type": "boolean",
+            "description": "If enabled, embedding of videos is restricted to a list of domains managed by your Account Admin."
+          },
+          "allowAdditionalDomainsEnabled": {
+            "type": "boolean",
+            "description": "If enabled, additional domains from which viewers can view this video can be added."
+          },
+          "additionalEmbedDomains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Additional domains from which viewers can view this video via an embed."
           }
         }
       },
@@ -13706,6 +14100,13 @@
           "sensitiveContent": {
             "type": "boolean",
             "description": "This will prevent sensitive content from being indexed in Elastic Search."
+          },
+          "additionalEmbedDomains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Additional domains from which viewers can view this video via an embed. This field is only applicable if the account admin has enabled additional domains for embeds. Do not add https:// to the domain string or it will fail."
           }
         }
       },
@@ -14022,6 +14423,30 @@
             "type": "string"
           },
           "userId": {
+            "type": "string"
+          },
+          "geoLocation": {
+            "$ref": "#/components/schemas/userSessionGeoLocationResponse"
+          }
+        }
+      },
+      "userSessionGeoLocationResponse": {
+        "type": "object",
+        "properties": {
+          "continent": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string",
+            "description": "State or province"
+          },
+          "city": {
+            "type": "string"
+          },
+          "postalCode": {
             "type": "string"
           }
         }
@@ -15242,6 +15667,13 @@
             "type": "boolean",
             "description": "This will prevent sensitive content from being indexed in Elastic Search.",
             "default": false
+          },
+          "additionalEmbedDomains": {
+            "type": "array",
+            "description": "Additional domains from which viewers can view this video via an embed. This field is only applicable if the account admin has enabled additional domains for embeds. Do not add https:// to the domain string or it will fail.",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -16178,6 +16610,197 @@
           },
           "dMEStatus": {
             "$ref": "#/components/schemas/dmeHealthStatus"
+          },
+          "sslExpiryDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "deviceLogsResponse": {
+        "type": "object",
+        "properties": {
+          "deviceId": {
+            "type": "string",
+            "description": "Device ID"
+          },
+          "deviceName": {
+            "type": "string",
+            "description": "Device name"
+          },
+          "deviceType": {
+            "$ref": "#/components/schemas/logDeviceType"
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "accountName": {
+            "type": "string"
+          },
+          "scrollId": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/deviceLog"
+            }
+          }
+        },
+        "x-sdk-single-key": "items"
+      },
+      "deviceLog": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/deviceLogStatus"
+          },
+          "actionName": {
+            "type": "string"
+          },
+          "message": {
+            "type": "object"
+          },
+          "dateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "deviceLogStatus": {
+        "type": "string",
+        "enum": [
+          "Success",
+          "Requested",
+          "Failed"
+        ]
+      },
+      "logDeviceType": {
+        "type": "string",
+        "enum": [
+          "Custom",
+          "Dme",
+          "Encoder",
+          "LdapConnector"
+        ]
+      },
+      "dmePrepositionVideosResponse": {
+        "type": "object",
+        "properties": {
+          "ignoredVideos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/dmePrepositionVideosInstanceResponse"
+            }
+          }
+        }
+      },
+      "dmePrepositionVideosInstanceResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Video Id"
+          },
+          "instanceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Instance Id"
+            }
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason for ignoring the ingestion of a video instance."
+          }
+        }
+      },
+      "dmePrepositionVideos": {
+        "type": "object",
+        "properties": {
+          "videos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/dmePrepositionVideoInstance"
+            }
+          }
+        }
+      },
+      "dmePrepositionVideoInstance": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Video Id"
+          },
+          "instanceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Instance Id"
+            }
+          }
+        }
+      },
+      "accountDeviceLogsResponse": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string"
+          },
+          "accountName": {
+            "type": "string"
+          },
+          "scrollId": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/accountDeviceLog"
+            }
+          }
+        },
+        "x-sdk-single-key": "items"
+      },
+      "accountDeviceLog": {
+        "type": "object",
+        "properties": {
+          "deviceId": {
+            "type": "string",
+            "description": "Device ID"
+          },
+          "deviceName": {
+            "type": "string",
+            "description": "Device name"
+          },
+          "deviceType": {
+            "$ref": "#/components/schemas/logDeviceType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/deviceLogStatus"
+          },
+          "actionName": {
+            "type": "string"
+          },
+          "message": {
+            "type": "object"
+          },
+          "dateTime": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -16426,9 +17049,15 @@
           "secondaryRtmp": {
             "$ref": "#/components/schemas/eventRtmpInfo"
           },
+          "srt": {
+            "$ref": "#/components/schemas/eventSrtInfo"
+          },
+          "secondarySrt": {
+            "$ref": "#/components/schemas/eventSrtInfo"
+          },
           "secondarySourceEnabled": {
             "type": "boolean",
-            "description": "Default=false. If enabled, the event will have a secondary RTMP source for redundancy. This is only applicable when videoSourceType is Rtmp."
+            "description": "Default=false. If enabled, the event will have a secondary RTMP or SRT source for redundancy. This is only applicable when videoSourceType is Rtmp or Srt."
           },
           "webcastType": {
             "$ref": "#/components/schemas/webcastType"
@@ -16625,6 +17254,21 @@
           "postRollVideoId": {
             "type": "string",
             "description": "Video Id of the Trailer video for the event."
+          },
+          "domainAllowlistEnabled":{
+            "type": "boolean",
+            "description": "If enabled, embedding of webcasts is restricted to a list of domains managed by your Account Admin."
+          },
+          "allowAdditionalDomainsEnabled": {
+            "type": "boolean",
+            "description": "If enabled, additional domains from which viewers can view this webcast can be added."
+          },
+          "additionalEmbedDomains": {
+            "type": "array",
+            "description": "Additional domains from which viewers can view this webcast via an embed.",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -16640,7 +17284,7 @@
       },
       "eventSourceType": {
         "type": "string",
-        "description": "This is an enum and can have the following values: <code>PresentationProfile, SipAddress, WebexTeam, WebexLiveStream, Zoom, MicrosoftTeams, Rtmp, Vod, WebrtcSinglePresenter, Pexip, Producer</code></br></br> Note that WebrtcSinglePresenter represents <i>Webcam and Screenshare</i> source in rev UI.  This field is required to create/edit WebexLiveStream event.",
+        "description": "This is an enum and can have the following values: <code>PresentationProfile, SipAddress, WebexTeam, WebexLiveStream, Zoom, MicrosoftTeams, Srt, Rtmp, Vod, WebrtcSinglePresenter, Pexip, Producer</code></br></br> Note that WebrtcSinglePresenter represents <i>Webcam and Screenshare</i> source in Vbrick UI.  This field is required to create/edit WebexLiveStream event.",
         "enum": [
           "PresentationProfile",
           "SipAddress",
@@ -16648,6 +17292,7 @@
           "WebexLiveStream",
           "Zoom",
           "MicrosoftTeams",
+"Srt",
           "Rtmp",
           "Vod",
           "WebrtcSinglePresenter",
@@ -17262,7 +17907,7 @@
           },
           "secondarySourceEnabled": {
             "type": "boolean",
-            "description": "Default=false, Specifies if the secondary RTMP source is enabled. This is only applicable when videoSourceType is Rtmp.",
+            "description": "Default=false, Specifies if the secondary RTMP or SRT source is enabled. This is only applicable when videoSourceType is Rtmp or Srt.",
             "default": false
           },
           "webcastType": {
@@ -17480,6 +18125,13 @@
           "postRollVideoId": {
             "type": "string",
             "description": "Video Id of the Trailer video for the event."
+},
+          "additionalEmbedDomains": {
+            "type": "array",
+            "description": "Additional domains from which viewers can view this webcast via an embed. This field is only applicable if the account admin has enabled additional domains for embeds. Do not add https:// to the domain string or it will fail.",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -17493,7 +18145,12 @@
             "properties": {
               "regenerateRtmpUrlAndKey": {
                 "type": "boolean",
-                "description": "Default=false, Specifies if the exiting RTMP based webcast URL and Key needs to be regenerated.",
+                "description": "Default=false. Specifies if the existing RTMP-based webcast URL and key need to be regenerated. This also affects the backup URL and Key if existing.",
+                "default": false
+              },
+              "regenerateSrtUrlAndKey": {
+                "type": "boolean",
+                "description": "Default=false. Specifies if the existing SRT-based webcast URL and key need to be regenerated. This also affects the backup URL and Key if existing.",
                 "default": false
               }
             }
@@ -18019,9 +18676,15 @@
           "secondaryRtmp": {
             "$ref": "#/components/schemas/eventRtmpInfo"
           },
+"srt": {
+            "$ref": "#/components/schemas/eventSrtInfo"
+          },
+          "secondarySrt": {
+            "$ref": "#/components/schemas/eventSrtInfo"
+          },
           "secondarySourceEnabled": {
             "type": "boolean",
-            "description": "Default=false, Specifies if the secondary RTMP source is enabled. This is only applicable when videoSourceType is Rtmp.",
+            "description": "Default=false, Specifies if the secondary RTMP or SRT source is enabled. This is only applicable when videoSourceType is Rtmp or Srt.",
             "default": false
           },
           "webcastType": {
@@ -18294,6 +18957,16 @@
           }
         }
       },
+"eventSrtInfo": {
+        "type": "object",
+        "description": "Used if recording a srt stream as the video source.",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The SRT push Url to use with the scheduled event."
+          }
+        }
+      },
       "webcastType": {
         "type": "string",
         "description": "Scheduled event type used for integrations, default value is Vbrick ('Rev').",
@@ -18525,6 +19198,9 @@
             "items": {
               "$ref": "#/components/schemas/userPollResponses"
             }
+          },
+          "geoLocation": {
+            "$ref": "#/components/schemas/userSessionGeoLocationResponse"  
           }
         }
       },
@@ -18805,6 +19481,9 @@
                 },
                 "ProfileImageUrl": {
                   "type": "string"
+                },
+                "GeoLocation": {
+                  "$ref": "#/components/schemas/attendeeRealtimeGeoLocationResponse"  
                 }
               }
             }
@@ -18829,6 +19508,27 @@
           },
           "multicastErrorsPerAttendees": {
             "type": "integer"
+          }
+        }
+      },
+      "attendeeRealtimeGeoLocationResponse": {
+        "type": "object",
+        "properties": {
+          "Continent": {
+            "type": "string"
+          },
+          "Country": {
+            "type": "string"
+          },
+          "Region": {
+            "type": "string",
+            "description": "State or province"
+          },
+          "City": {
+            "type": "string"
+          },
+          "PostalCode": {
+            "type": "string"
           }          
         }
       },
@@ -21399,6 +22099,18 @@
             "items": {
               "$ref": "#/components/schemas/expiryRules"
             }
+          },
+          "domainAllowlistEnabled": {
+            "type": "boolean"
+          },
+          "domainAllowList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "allowAdditionalDomainsEnabled": {
+            "type": "boolean"
           }
         }
       },
