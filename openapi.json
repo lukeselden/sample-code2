@@ -5443,7 +5443,7 @@
           {
             "name": "playlistId",
             "in": "path",
-            "description": "Id of Playlist to edit.",
+            "description": "Id of Playlist to edit. Possible values: Account Id, featured-playlist, or public-featured-playlist.",
             "required": true,
             "schema": {
               "type": "string"
@@ -5518,6 +5518,60 @@
         }
       }
     },
+    "/api/v2/playlists/{playlistId}/owners": {
+      "put": {
+        "tags": [
+          "Playlists"
+        ],
+        "summary": "Update Playlist Owners",
+        "description": "Edit owners of a playlist.",
+        "operationId": "editPlaylistOwners",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/authorizationParam"
+          },
+          {
+            "name": "playlistId",
+            "in": "path",
+            "description": "Id of Playlist to edit.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "List of user ids to set as owners of the playlist.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/editPlaylistOwners"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized error",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "editPlaylistOwners"
+      }
+    },
     "/api/v2/playlists/featured-playlist": {
       "put": {
         "tags": [
@@ -5526,6 +5580,51 @@
         "summary": "Update Featured Playlist",
         "description": "Edit the Vbrick Featured Playlist on the Home Page. You must have Account or Media Admin permissions.",
         "operationId": "editFeaturedPlaylist",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/authorizationParam"
+          }
+        ],
+        "requestBody": {
+          "description": "Video Ids to edit in the playlist and the action taken (add or remove).",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/editFeaturedPlaylistRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized error",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "editPlaylistMembers"
+      }
+    },
+    "/api/v2/playlists/public-featured-playlist": {
+      "put": {
+        "tags": [
+          "Playlists"
+        ],
+        "summary": "Update Public Featured Playlist",
+        "description": "Edit the Vbrick Public Featured Playlist on the Home Page. You must have Account or Media Admin permissions and the Public Featured Playlist enabled in your account.",
+        "operationId": "editPublicFeaturedPlaylist",
         "parameters": [
           {
             "$ref": "#/components/parameters/authorizationParam"
@@ -17292,7 +17391,7 @@
           "WebexLiveStream",
           "Zoom",
           "MicrosoftTeams",
-"Srt",
+          "Srt",
           "Rtmp",
           "Vod",
           "WebrtcSinglePresenter",
@@ -18125,7 +18224,7 @@
           "postRollVideoId": {
             "type": "string",
             "description": "Video Id of the Trailer video for the event."
-},
+          },
           "additionalEmbedDomains": {
             "type": "array",
             "description": "Additional domains from which viewers can view this webcast via an embed. This field is only applicable if the account admin has enabled additional domains for embeds. Do not add https:// to the domain string or it will fail.",
@@ -18676,7 +18775,7 @@
           "secondaryRtmp": {
             "$ref": "#/components/schemas/eventRtmpInfo"
           },
-"srt": {
+          "srt": {
             "$ref": "#/components/schemas/eventSrtInfo"
           },
           "secondarySrt": {
@@ -18957,7 +19056,7 @@
           }
         }
       },
-"eventSrtInfo": {
+      "eventSrtInfo": {
         "type": "object",
         "description": "Used if recording a srt stream as the video source.",
         "properties": {
@@ -21388,6 +21487,12 @@
           },
           "searchFilter": {
             "$ref": "#/components/schemas/videoSearchRequest"
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/playlistOwnersType"
+            }
           }
         }
       },
@@ -21397,6 +21502,23 @@
           "Static",
           "Dynamic"
         ]
+      },
+      "playlistOwnersType": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          }
+        }
       },
       "whenUploaded": {
         "type": "object",
@@ -21529,6 +21651,17 @@
           }
         }
       },
+      "editPlaylistOwners": {
+        "type": "object",
+        "properties": {
+          "owners": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "playlistDetails": {
         "type": "object",
         "properties": {
@@ -21543,6 +21676,12 @@
           },
           "playlistType": {
             "$ref": "#/components/schemas/playlistType"
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/playlistOwnersType"
+            }
           },
           "searchFilter": {
             "description": "Search filter applies to Dynamic playlists only",
@@ -21582,6 +21721,23 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/playlistVideoItem"
+            }
+          },
+          "publicFeaturedPlaylist": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "playbackUrl": {
+                "type": "string"
+              },
+              "videos": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/playlistVideoItem"
+                }
+              }
             }
           },
           "playlists": {
