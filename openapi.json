@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Rev REST APIs",
-    "description": "Rev API is the primary means for developers to access, create and modify resources in Rev. Apps can read and write to the resources and mirror some of the most popular features available in Rev Web Portal such as uploading and editing videos, creating, editing, and starting webcasts, adding and removing users and groups, viewing reports and much more using the Rev API. Depending on your app’s use case, you can choose from our various APIs and implement the features accordingly.</br>All Rev APIs are based on REST architecture and are accessed via HTTPS. The complete URL is based on your Rev tenant URL and varies depending on the endpoint of the resource being accessed. For instance, you can access a user based on Rev User ID vai a a GET request to this URL: https://YOUR_REV_TENANT_URL/api/v2/users/userId.</br>Please make sure that you are familiar with the authentication and authorization approaches for Rev APIs.",
+    "title": "Vbrick REST APIs",
+    "description": "Vbrick API is the primary means for developers to access, create and modify resources in Vbrick. Apps can read and write to the resources and mirror some of the most popular features available in Vbrick Web Portal such as uploading and editing videos, creating, editing, and starting webcasts, adding and removing users and groups, viewing reports and much more using the Vbrick API. Depending on your app’s use case, you can choose from our various APIs and implement the features accordingly.</br>All Vbrick APIs are based on REST architecture and are accessed via HTTPS. The complete URL is based on your Vbrick tenant URL and varies depending on the endpoint of the resource being accessed. For instance, you can access a user based on Vbrick User ID vai a a GET request to this URL: https://YOUR_VBRICK_TENANT_URL/api/v2/users/userId.</br>Please make sure that you are familiar with the authentication and authorization approaches for Vbrick APIs.",
     "version": "2.0.0"
   },
   "x-explorer-enabled": false,
@@ -17,7 +17,7 @@
   "security": [],
   "servers": [
     {
-      "url": "https://YOUR_REV_TENANT_URL"
+      "url": "https://YOUR_VBRICK_TENANT_URL"
     }
   ],
   "tags": [
@@ -65,7 +65,7 @@
           "Authentication"
         ],
         "summary": "User Login API Key",
-        "description": "This authentication API endpoint is used to authenticate individual user using user’s pre-generated API Key and Secret. Use the token that is returned in the response as the Authorization to run other public APIs. Once a session is established using this endpoint, subsequent API calls that uses the token returned from this endpoint will be limited according to the role and privileges of this particular user. Using this method, the user via API will have the same privileges and roles that user has when they login to Rev UI. This authentication mechanism can be used to automate Rev workflows using role and privileges of a given user.</br></br>Account Admins can generate user’s API Key and Secret combination. Secret is only visible at the time of generation. API Key and Secret combination can be regenerated and deleted. The key will not work for suspended users. Also authenticating a user using this method will consume a user license if the user is unlicensed",
+        "description": "This authentication API endpoint is used to authenticate individual user using user’s pre-generated API Key and Secret. Use the token that is returned in the response as the Authorization to run other public APIs. Once a session is established using this endpoint, subsequent API calls that uses the token returned from this endpoint will be limited according to the role and privileges of this particular user. Using this method, the user via API will have the same privileges and roles that user has when they login to Vbrick UI. This authentication mechanism can be used to automate Vbrick workflows using role and privileges of a given user.</br></br>Account Admins can generate user’s API Key and Secret combination. Secret is only visible at the time of generation. API Key and Secret combination can be regenerated and deleted. The key will not work for suspended users. Also authenticating a user using this method will consume a user license if the user is unlicensed",
         "operationId": "authenticateUser",
         "x-sdk-method-name": "loginApiKey",
         "requestBody": {
@@ -274,7 +274,7 @@
         ],
         "deprecated": true,
         "summary": "Extend API Key Session (Deprecated)",
-        "description": "This is a deprecated endpoint. Use <a href='/reference/extendusersession'>Extend Login Session for All Authentication Methods</a> instead. This endpoint extends the current user API key session by preventing it from timing out. Successful completion returns a new expiration date and time which then expires the session at that new date and time.",
+        "description": "This is a deprecated endpoint. Use [Extend Login Session for All Authentication Methods](/reference/extendusersession) instead. This endpoint extends the current user API key session by preventing it from timing out. Successful completion returns a new expiration date and time which then expires the session at that new date and time.",
         "operationId": "extendApikeySessionTimeout",
         "x-sdk-ignore": true,
         "parameters": [
@@ -320,7 +320,7 @@
         ],
         "deprecated": true,
         "summary": "Extend User Login Session (Deprecated)",
-        "description": "This is a deprecated endpoint. Use <a href='/reference/extendusersession'>Extend Login Session for All Authentication Methods</a> instead. This endpoint extends the current session by preventing it from timing out. Successful completion returns a new expiration date and time which expires the session at that new date and time.",
+        "description": "This is a deprecated endpoint. Use [Extend Login Session for All Authentication Methods](/reference/extendusersession) instead. This endpoint extends the current session by preventing it from timing out. Successful completion returns a new expiration date and time which expires the session at that new date and time.",
         "operationId": "extendSessionTimeout",
         "x-sdk-ignore": true,
         "parameters": [
@@ -368,7 +368,7 @@
         ],
         "deprecated": true,
         "summary": "OAuth Authorization (Deprecated)",
-        "description": "This is a deprecated endpoint. Use <a href='/reference/authorize'>OAuth2 Authorization</a> instead. Successful invocation of this API results in the user being redirected to the URL specified in the redirect_uri parameter.",
+        "description": "This is a deprecated endpoint. Use [OAuth2 Authorization](/reference/authorize) instead. Successful invocation of this API results in the user being redirected to the URL specified in the redirect_uri parameter.",
         "operationId": "authorization",
         "x-sdk-method-name": "legacyOAuthAuthorizationFlow",
         "x-sdk-ignore": true,
@@ -376,7 +376,7 @@
           {
             "name": "apiKey",
             "in": "query",
-            "description": "ApiKey obtained after registering the app in Rev",
+            "description": "ApiKey obtained after registering the app in Vbrick",
             "required": true,
             "schema": {
               "type": "string"
@@ -450,7 +450,7 @@
         ],
         "deprecated": true,
         "summary": "OAuth Access Token (Deprecated)",
-        "description": "This is a deprecated endpoint. Use <a href='/reference/oauth2token'>OAuth2 Access Token</a> instead. Obtains the access token that identifies the Rev user that granted access to the client.",
+        "description": "This is a deprecated endpoint. Use [OAuth2 Access Token](/reference/oauth2token) instead. Obtains the access token that identifies the Vbrick user that granted access to the client.",
         "operationId": "token",
         "x-sdk-method-name": "legacyGetOAuthToken",
         "x-sdk-ignore": true,
@@ -502,7 +502,7 @@
           {
             "name": "client_id",
             "in": "query",
-            "description": "client_id (ApiKey) obtained after registering the app in Rev",
+            "description": "client_id (ApiKey) obtained after registering the app in Vbrick",
             "required": true,
             "schema": {
               "type": "string"
@@ -529,7 +529,7 @@
           {
             "name": "redirect_uri",
             "in": "query",
-            "description": "This determines where to send the response. It should match the registered redirect uri with rev.",
+            "description": "This determines where to send the response. It should match the registered redirect uri with Vbrick.",
             "required": true,
             "schema": {
               "type": "string"
@@ -546,7 +546,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response<p>After validating the client_id and redirect_uri, user will be prompted to login using the authentication mechanism configured in Rev. Once the user is successful logged into Rev, user is redirected back to the redirect uri provided along with an authorization code as a query parameter.</p>",
+            "description": "Successful response<p>After validating the client_id and redirect_uri, user will be prompted to login using the authentication mechanism configured in Vbrick. Once the user is successful logged into Vbrick, user is redirected back to the redirect uri provided along with an authorization code as a query parameter.</p>",
             "content": {}
           },
           "401": {
@@ -566,7 +566,7 @@
           "Authentication"
         ],
         "summary": "OAuth2 Access Token",
-        "description": "Obtains the access token that identifies the Rev user that granted access to the client.",
+        "description": "Obtains the access token that identifies the Vbrick user that granted access to the client.",
         "operationId": "oauth2token",
         "x-sdk-method-name": "getOauthToken",
         "requestBody": {
@@ -666,7 +666,7 @@
           "Authentication"
         ],
         "summary": "JWT Authentication",
-        "description": "This authentication API endpoint is used to authenticate individual user using a JWT token. Use the token that is returned in the response as the Authorization to run other public APIs. Once a session is established using this endpoint, subsequent API calls that uses the token returned from this endpoint will be limited according to the role and privileges of this particular user. Using this method, the user via API will have the same privileges and roles that user has when they login to Rev UI. This authentication mechanism can be used to automate Rev workflows using role and privileges of a given user.</br></br>Account Admins can generate user’s API Key and Secret combination. Secret is only visible at the time of generation. API Key and Secret combination can be regenerated and deleted. The key will not work for suspended users. Also authenticating a user using this method will consume a user license if the user is unlicensed",
+        "description": "This authentication API endpoint is used to authenticate individual user using a JWT token. Use the token that is returned in the response as the Authorization to run other public APIs. Once a session is established using this endpoint, subsequent API calls that uses the token returned from this endpoint will be limited according to the role and privileges of this particular user. Using this method, the user via API will have the same privileges and roles that user has when they login to Vbrick UI. This authentication mechanism can be used to automate Vbrick workflows using role and privileges of a given user.</br></br>Account Admins can generate user’s API Key and Secret combination. Secret is only visible at the time of generation. API Key and Secret combination can be regenerated and deleted. The key will not work for suspended users. Also authenticating a user using this method will consume a user license if the user is unlicensed",
         "operationId": "jwtauthenticate",
         "x-sdk-method-name": "loginJWT",
         "parameters": [
@@ -718,7 +718,7 @@
           "Videos"
         ],
         "summary": "Upload Video",
-        "description": "Uploads a supported video format. A full list of <a href=/docs/supported-video-and-audio-formats>supported video formats</a> can be found in the Technical Requirements guide.",
+        "description": "Uploads a supported video format. A full list of [supported video formats](/docs/supported-video-and-audio-formats) can be found in the Technical Requirements guide.",
         "operationId": "uploadVideo",
         "parameters": [
           {
@@ -779,7 +779,7 @@
             "content": {}
           },
           "500": {
-            "description": "Internal server error<p>uploader not specified or username does not exist in Rev</p><p>categoryIds incorrect or do not exist in Rev</p><p>customField does not exist in Rev or picklist values incorrect</p><p>publishDate format incorrect. Must be YYYY-MM-DD</p>",
+            "description": "Internal server error<p>uploader not specified or username does not exist in Vbrick</p><p>categoryIds incorrect or do not exist in Vbrick</p><p>customField does not exist in Vbrick or picklist values incorrect</p><p>publishDate format incorrect. Must be YYYY-MM-DD</p>",
             "content": {
               "application/json": {
                 "schema": {
@@ -797,7 +797,7 @@
           "Videos"
         ],
         "summary": "Update Video Details/Metadata",
-        "description": "This endpoint is used to set or modify all metadata fields for a specific video. Note that if you are only changing one field (categories for example) <em>all</em> other metadata fields must also be submitted with this API call. Otherwise, those values that are not set are reset to defaults or nullified entirely.<p>To edit specific fields instead of all fields, use the <a href=/reference/editvideopatch>Patch Video Details/Metadata</a> endpoint instead.</p>",
+        "description": "This endpoint is used to set or modify all metadata fields for a specific video. Note that if you are only changing one field (categories for example) <em>all</em> other metadata fields must also be submitted with this API call. Otherwise, those values that are not set are reset to defaults or nullified entirely.<p>To edit specific fields instead of all fields, use the [Patch Video Details/Metadata](/reference/editvideopatch) endpoint instead.</p>",
         "operationId": "updateVideo",
         "x-sdk-method-name": "editVideo",
         "parameters": [
@@ -852,7 +852,7 @@
           "Videos"
         ],
         "summary": "Patch Video Details/Metadata",
-        "description": "Partially edits the metadata details of a video. You do not need to provide the fields that are not changing.<p>Operations supported: add,remove,copy,replace,test,move.</p><p>Keep in mind that Access Controls are strictly dictated by <a href=/docs/roles-and-permissions>Roles and Permissions.</a></p><p>Please refer to http://jsonpatch.com/ for the format of the request body.</p><strong>Examples:</strong><p>using categories: [{'op': 'add', 'path': '/Categories/0', 'value': '03846100-96ac-4628-bbe3-b23a0df1081d' }]</p><p>using accessControlEntities: [{ 'op': 'replace', 'path': '/accessControlEntities/0/CanEdit', 'value': 'false' }]</p><p>Non-Editable fields [Id,ApprovalStatus,UploadedBy,WhenUploaded,LastViewed] are ignored.</p></p>",
+        "description": "Partially edits the metadata details of a video. You do not need to provide the fields that are not changing.<p>Operations supported: add,remove,copy,replace,test,move.</p><p>Keep in mind that Access Controls are strictly dictated by [Roles and Permissions](/docs/roles-and-permissions).</p><p>Please refer to http://jsonpatch.com/ for the format of the request body.</p><strong>Examples:</strong><p>using categories: [{'op': 'add', 'path': '/Categories/0', 'value': '03846100-96ac-4628-bbe3-b23a0df1081d' }]</p><p>using accessControlEntities: [{ 'op': 'replace', 'path': '/accessControlEntities/0/CanEdit', 'value': 'false' }]</p><p>Non-Editable fields [Id,ApprovalStatus,UploadedBy,WhenUploaded,LastViewed] are ignored.</p></p>",
         "operationId": "editVideoPatch",
         "x-sdk-method-name": "patchVideo",
         "parameters": [
@@ -911,7 +911,7 @@
           "Videos"
         ],
         "summary": "Delete Video",
-        "description": "This endpoint deletes a video asset from Rev. This includes videos stored on a DME.",
+        "description": "This endpoint deletes a video asset from Vbrick. This includes videos stored on a DME.",
         "operationId": "deleteVideo",
         "parameters": [
           {
@@ -949,7 +949,7 @@
           "Videos"
         ],
         "summary": "Update Video Access Control",
-        "description": "This endpoint edits the Access Control permissions on a specific video.<p>Allows Access Control entities to be set for all four types. Note that if set to <b>Public</b>, the Public setting must first be enabled on the Rev account and a password may then be set if desired. If set to <b>Channels</b>, there should be one valid Channel in the account, otherwise the request is rejected. The default setting is <b>Private</b>.</p>",
+        "description": "This endpoint edits the Access Control permissions on a specific video.<p>Allows Access Control entities to be set for all four types. Note that if set to <b>Public</b>, the Public setting must first be enabled on the Vbrick account and a password may then be set if desired. If set to <b>Channels</b>, there should be one valid Channel in the account, otherwise the request is rejected. The default setting is <b>Private</b>.</p>",
         "operationId": "editVideoAccessControl",
         "parameters": [
           {
@@ -999,7 +999,7 @@
           "Videos"
         ],
         "summary": "Edit a Video",
-        "description": "This endpoint allows you to edit and replace a specified video based on a list of supplied clips. Each clip is defined by the start and end parameters and applied to the videoId you specify. Multiple clips can be defined.<br><br>Be aware that this is a destructive process and you may wish to create a copy of the original video <em>before</em> applying changes with this endpoint. Meaning, the end result is a <em>new</em> video with the same videoId combined from all the concatenated video clips from the original video. Any video not acessible is ignored in the concatenation process.<br><br>Note that if you edit a video that has transcripts, those trascripts may be out of sync with the video and will need to be regenerated.<br><br>This endpoint replaces the <a href=/reference/trimvideo>trim video</a> API which is now deprecated as a result.</br>",
+        "description": "This endpoint allows you to edit and replace a specified video based on a list of supplied clips. Each clip is defined by the start and end parameters and applied to the videoId you specify. Multiple clips can be defined.<br><br>Be aware that this is a destructive process and you may wish to create a copy of the original video <em>before</em> applying changes with this endpoint. Meaning, the end result is a <em>new</em> video with the same videoId combined from all the concatenated video clips from the original video. Any video not acessible is ignored in the concatenation process.<br><br>Note that if you edit a video that has transcripts, those trascripts may be out of sync with the video and will need to be regenerated.<br><br>This endpoint replaces the [Trim Video](/reference/trimvideo) API which is now deprecated as a result.</br>",
         "operationId": "editVideo",
         "x-sdk-method-name": "editVideoClips",
         "parameters": [
@@ -1054,7 +1054,7 @@
         ],
         "deprecated": true,
         "summary": "Trim a Video (Deprecated)",
-        "description": "This endpoint allows you to trim videos that are hosted in Rev. This endpoint is deprecated. Use the <a href=/reference/editvideo>edit a video</a> API instead.",
+        "description": "This endpoint allows you to trim videos that are hosted in Vbrick. This endpoint is deprecated. Use the [Edit a Video](/reference/editvideo) API instead.",
         "operationId": "trimVideo",
         "parameters": [
           {
@@ -1269,7 +1269,7 @@
           {
             "name": "ip",
             "in": "query",
-            "description": "IP addresses of user/client with comma separated values (Example: <code>127.0.0.0</code>, <code>10.0.10.124</code>). This is used for <a href=/docs/manage-and-add-zones>Zoning rules</a> in determining the streams to return.",
+            "description": "IP addresses of user/client with comma separated values (Example: <code>127.0.0.0</code>, <code>10.0.10.124</code>). This is used for [Zoning rules](/docs/manage-and-add-zones) in determining the streams to return.",
             "schema": {
               "type": "string"
             }
@@ -1370,7 +1370,7 @@
           "Videos"
         ],
         "summary": "Get Video Thumbnail Configuration",
-        "description": "The <a href=/reference/downloadthumbnailsheet>Get Video Thumbnail Sheet</a> is returned as a grid view when using this endpoint. Each thumbnail is indexed from left to right, then top to bottom.",
+        "description": "The [Get Video Thumbnail Sheet](/reference/downloadthumbnailsheet) is returned as a grid view when using this endpoint. Each thumbnail is indexed from left to right, then top to bottom.",
         "operationId": "getVideoThumbnailConfig",
         "parameters": [
           {
@@ -1477,7 +1477,7 @@
           "Videos"
         ],
         "summary": "Upload Video Thumbnail",
-        "description": "Uploads an alternate image to be used as a thumbnail for a specified video. Rev auto-generates a default thumbnail if you do not upload one of your choice. Note that if you replace Rev’s auto-generated thumbnail with one that you upload it will be deleted and may <em>not</em> be recovered.",
+        "description": "Uploads an alternate image to be used as a thumbnail for a specified video. Vbrick auto-generates a default thumbnail if you do not upload one of your choice. Note that if you replace Vbrick’s auto-generated thumbnail with one that you upload it will be deleted and may <em>not</em> be recovered.",
         "operationId": "uploadThumbnailFiles",
         "x-sdk-method-name": "uploadThumbnail",
         "parameters": [
@@ -1545,7 +1545,7 @@
           {
             "name": "key",
             "in": "path",
-            "description": "File key of the video thumbnail to download.<p>Obtained via the <a href=/reference/getvideosdetails>Get Video Metadata</a> endpoint and the <b>thumbnailKey</b> property that is returned.</p>",
+            "description": "File key of the video thumbnail to download.<p>Obtained via the [Get Video Metadata](/reference/getvideosdetails) endpoint and the <b>thumbnailKey</b> property that is returned.</p>",
             "required": true,
             "schema": {
               "type": "string"
@@ -1594,7 +1594,7 @@
           {
             "name": "key",
             "in": "path",
-            "description": "File key of the video thumbnail to download.<p>Obtained via the <a href=/reference/getvideosdetails>Get Video Metadata</a> endpoint and the <b>thumbnailKey</b> property that is returned.</p>",
+            "description": "File key of the video thumbnail to download.<p>Obtained via the [Get Video Metadata](/reference/getvideosdetails) endpoint and the <b>thumbnailKey</b> property that is returned.</p>",
             "required": true,
             "schema": {
               "type": "string"
@@ -1671,7 +1671,7 @@
           "Videos"
         ],
         "summary": "Get Video Thumbnail Sheet",
-        "description": "This endpoint is returned when using the <a href=/reference/getvideothumbnailconfig>Get Video Thumbnail Configuration</a> endpoint. It is not intended to be used by itself. ",
+        "description": "This endpoint is returned when using the [Get Video Thumbnail Configuration](/reference/getvideothumbnailconfig) endpoint. It is not intended to be used by itself. ",
         "operationId": "downloadThumbnailSheet",
         "parameters": [
           {
@@ -1721,7 +1721,7 @@
           "Videos"
         ],
         "summary": "Generate Video Metadata",
-        "description": "Creates AI-generated metadata for a given video based on the type specified. You must specify the field type you want to generate (description/title/tags/chapters) or specify <strong>all</strong> to generate all of the fields for the video. This feature requires English transcription and must also be enabled for your Rev account.",
+        "description": "Creates AI-generated metadata for a given video based on the type specified. You must specify the field type you want to generate (description/title/tags/chapters) or specify <strong>all</strong> to generate all of the fields for the video. This feature requires English transcription and must also be enabled for your Vbrick account.",
         "operationId": "generateVideoMetadata",
         "parameters": [
           {
@@ -2051,7 +2051,7 @@
                 "properties": {
                   "Files": {
                     "type": "array",
-                    "description": "Supported <a href=/docs/supported-file-types>Supplemental File</a> types you may upload are found in the Technical Requirements guides.<p>Please provide Content-Type header for each file you upload.</p>",
+                    "description": "Supported [Supplemental File](/docs/supported-file-types) types you may upload are found in the Technical Requirements guides.<p>Please provide Content-Type header for each file you upload.</p>",
                     "items": {
                       "type": "string",
                       "format": "binary"
@@ -2548,7 +2548,7 @@
         ],
         "deprecated": true,
         "summary": "Update Video Comments",
-        "description": "This endpoint is used to submit a comment on a specified video. The username that submits the comment must exist in Rev.<p>This endpoint will be deprecated in favor of the <a href=/reference/addcomments>Add Video Comments</a> endpoint.</p>",
+        "description": "This endpoint is used to submit a comment on a specified video. The username that submits the comment must exist in Vbrick.<p>This endpoint will be deprecated in favor of the [Add Video Comments](/reference/addcomments) endpoint.</p>",
         "operationId": "submitComments",
         "x-sdk-ignore": true,
         "parameters": [
@@ -2697,7 +2697,7 @@
           "Videos"
         ],
         "summary": "Add Video Comment",
-        "description": "This endpoint is used to add a comment on a specified video. The username that submits the comment must exist in Rev. If a valid commentId is specified in the request, a child comment will be created. If commentId is not specified, a parent comment will be created.",
+        "description": "This endpoint is used to add a comment on a specified video. The username that submits the comment must exist in Vbrick. If a valid commentId is specified in the request, a child comment will be created. If commentId is not specified, a parent comment will be created.",
         "operationId": "addComments",
         "x-sdk-method-name": "addVideoComment",
         "parameters": [
@@ -2949,7 +2949,7 @@
           "Videos"
         ],
         "summary": "Delete Video External Access",
-        "description": "Revokes all email access to the specified video and also <em>deletes</em> all details in the database. This means you may not renew the external access at a later date. To leave details in place for potential renewal, consider using the <a href=/reference/revokevideoexternalaccess>Revoke Video External Access</a> endpoint instead.",
+        "description": "Revokes all email access to the specified video and also <em>deletes</em> all details in the database. This means you may not renew the external access at a later date. To leave details in place for potential renewal, consider using the [Revoke Video External Access](/reference/revokevideoexternalaccess) endpoint instead.",
         "operationId": "deleteVideoExternalAccess",
         "parameters": [
           {
@@ -3005,7 +3005,7 @@
           "Videos"
         ],
         "summary": "Revoke Video External Access",
-        "description": "Immediately revokes all email access to the specified video but leaves details in place in the database in the event you want to renew them. To delete all details from the database as well, use <a href=/reference/deletevideoexternalaccess>Delete Video External Access</a>.",
+        "description": "Immediately revokes all email access to the specified video but leaves details in place in the database in the event you want to renew them. To delete all details from the database as well, use [Delete Video External Access](/reference/deletevideoexternalaccess).",
         "operationId": "revokeVideoExternalAccess",
         "x-sdk-method-name": "revokeVideoExternalAccess",
         "parameters": [
@@ -3100,7 +3100,7 @@
           "Videos"
         ],
         "summary": "Convert Dual Stream to Switched (Single) Stream",
-        "description": "Converts a dual-stream video to a switched-stream (single) video. This endpoint only works for dual stream videos. <p>When you run this API, the MP4 switched-stream version is marked as the original and the HLS switched-stream version remains.</p><p>The HLS dual-stream version is deleted.</p><p>The <strong>hasDualStreams</strong> and <strong>isConvertedToSwitched</strong> parameters are updated accordingly in the <a href=/reference/getvideosdetails>Get Video Details/Metadata</a> and <a href=/reference/searchvideo>Search Video</a> endpoints.</p>",
+        "description": "Converts a dual-stream video to a switched-stream (single) video. This endpoint only works for dual stream videos. <p>When you run this API, the MP4 switched-stream version is marked as the original and the HLS switched-stream version remains.</p><p>The HLS dual-stream version is deleted.</p><p>The <strong>hasDualStreams</strong> and <strong>isConvertedToSwitched</strong> parameters are updated accordingly in the [Get Video Details/Metadata](/reference/getvideosdetails) and [Search Video](/reference/searchvideo) endpoints.</p>",
         "operationId": "convertDualStreamToSwitchedStream",
         "parameters": [
           {
@@ -3138,7 +3138,7 @@
           "Videos"
         ],
         "summary": "Search Videos",
-        "description": "This endpoint mimics the search control in the Rev portal. All results are based on the authenticated user making the API request.",
+        "description": "This endpoint mimics the search control in the Vbrick portal. All results are based on the authenticated user making the API request.",
         "operationId": "searchVideo",
         "x-sdk-method-name": "searchVideos",
         "parameters": [
@@ -3569,7 +3569,7 @@
           "Videos"
         ],
         "summary": "Download Video",
-        "description": "This endpoint downloads a video asset from Rev. The original file upload is downloaded.",
+        "description": "This endpoint downloads a video asset from Vbrick. The original file upload is downloaded.",
         "operationId": "downloadVideo",
         "parameters": [
           {
@@ -3614,14 +3614,14 @@
           "Videos"
         ],
         "summary": "Get Video oEmbed",
-        "description": "Gets oEmbed JSON data for a given video for video embedding. This is typically used for integrations into other social systems with activity feeds so users can watch video inline of an activity feed. The Rev Shared URL is also an acceptable format as noted in the example(s) below.<p>This API does not require an authorization header.</p>",
+        "description": "Gets oEmbed JSON data for a given video for video embedding. This is typically used for integrations into other social systems with activity feeds so users can watch video inline of an activity feed. The Vbrick Shared URL is also an acceptable format as noted in the example(s) below.<p>This API does not require an authorization header.</p>",
         "operationId": "oembed",
         "x-sdk-method-name": "getOembed",
         "parameters": [
           {
             "name": "url",
             "in": "query",
-            "description": "Rev URL of video to embed must be <code>URL (Percent) Encoded</code>. Please refer to https://en.wikipedia.org/wiki/Percent-encoding for details and example usage above.",
+            "description": "Vbrick URL of video to embed must be <code>URL (Percent) Encoded</code>. Please refer to https://en.wikipedia.org/wiki/Percent-encoding for details and example usage above.",
             "required": true,
             "schema": {
               "type": "string"
@@ -3856,7 +3856,7 @@
           "RevIQ"
         ],
         "summary": "Translate Video",
-        "description": "Translates a specified video. You must include both the source language and an array of target languages to translate the source language to. You must also have the <a href=/docs/roles-and-permissions#granular-roles-and-permissions>Rev IQ User</a> role to use this function.",
+        "description": "Translates a specified video. You must include both the source language and an array of target languages to translate the source language to. You must also have the [Vbrick IQ User](/docs/roles-and-permissions#granular-roles-and-permissions) role to use this function.",
         "operationId": "translateVideo",
         "parameters": [
           {
@@ -4065,7 +4065,7 @@
           "RevIQ"
         ],
         "summary": "Tag Users in Video",
-        "description": "This endpoint sends a video for Facial Recognition and tags the user accounts recognized in the video. The Rev account must have <a href=/docs/facial-recognition>Facial Recognition</a> activated and the user account must be enabled for recognition (i.e., profile not opted out and have a recognizable profile picture uploaded). You must also have the <a href=/docs/roles-and-permissions#granular-roles-and-permissions>Rev IQ User</a> role to use this function.",
+        "description": "This endpoint sends a video for Facial Recognition and tags the user accounts recognized in the video. The Vbrick account must have [Facial Recognition](/docs/facial-recognition) activated and the user account must be enabled for recognition (i.e., profile not opted out and have a recognizable profile picture uploaded). You must also have the [Vbrick Video IQ User](/docs/roles-and-permissions#granular-roles-and-permissions) role to use this function.",
         "operationId": "tagUsersInVideo",
         "parameters": [
           {
@@ -4087,11 +4087,11 @@
             "content": {}
           },
           "400": {
-            "description": "Bad request<p>This account has insufficient Rev IQ credits to complete the action.</p><p>Video is too large for user tagging.</p><p>Video codec or container is incorrect.</p>",
+            "description": "Bad request<p>This account has insufficient Vbrick Video IQ credits to complete the action.</p><p>Video is too large for user tagging.</p><p>Video codec or container is incorrect.</p>",
             "content": {}
           },
           "401": {
-            "description": "Unauthorized error<p>Rev IQ/Facial Recognition is not enabled for this account.</p><p>Insufficient rights to this video. You do not have edit rights.</p>",
+            "description": "Unauthorized error<p>Vbrick Video IQ/Facial Recognition is not enabled for this account.</p><p>Insufficient rights to this video. You do not have edit rights.</p>",
             "content": {}
           },
           "500": {
@@ -4155,7 +4155,7 @@
           "Videos"
         ],
         "summary": "Get Video Approval Processes List",
-        "description": "Gets a list of previously created approval processes for a user. This endpoint is for the user that is authenticated to Rev making this API call.",
+        "description": "Gets a list of previously created approval processes for a user. This endpoint is for the user that is authenticated to Vbrick making this API call.",
         "operationId": "getApprovalProcess",
         "x-sdk-method-name": "getUserApprovalProcesses",
         "parameters": [
@@ -4416,7 +4416,7 @@
           "Videos"
         ],
         "summary": "Search Suggestions for Videos",
-        "description": "This endpoint allows you to enter a string of 2-15 characters to return video search suggestions (up to 10) based on that string (for autocomplete).  The suggestions returned all begin with the string entered and results directly mimic using the Rev UI search bar.",
+        "description": "This endpoint allows you to enter a string of 2-15 characters to return video search suggestions (up to 10) based on that string (for autocomplete).  The suggestions returned all begin with the string entered and results directly mimic using the Vbrick UI search bar.",
         "operationId": "searchSuggestedVideos",
         "x-sdk-method-name": "getAutocompleteSuggestions",
         "parameters": [
@@ -4555,7 +4555,7 @@
           "Administration"
         ],
         "summary": "Get Video Feature Settings",
-        "description": "Returns all the account-level video settings and features that are available and/or enabled for videos in your Rev portal, including any custom settings.  If you specify a video Id, it returns the features and settings that are applied for just that video.",
+        "description": "Returns all the account-level video settings and features that are available and/or enabled for videos in your Vbrick portal, including any custom settings.  If you specify a video Id, it returns the features and settings that are applied for just that video.",
         "operationId": "getVideoFeatures",
         "parameters": [
           {
@@ -4602,7 +4602,7 @@
           "Recording"
         ],
         "summary": "Start Video Conference Recording",
-        "description": "Video Conference endpoints allow you to record SIP-based video conference meetings and store/modify/search the resulting VOD videos in Rev. The VC endpoints are available only with a Rev-Cloud subscription.<p>Refer to <a href=/docs/video-conference-vc-integrations>Video Conference (VC)Integrations</a> for supported endpoints.</p><p>This endpoint starts a video conference recording. A SIP address and account access to the video conference recording integration is required.</p>",
+        "description": "Video Conference endpoints allow you to record SIP-based video conference meetings and store/modify/search the resulting VOD videos in Vbrick. The VC endpoints are available only with a Vbrick-Cloud subscription.<p>Refer to [Video Conference (VC) Integrations](/docs/video-conference-vc-integrations) for supported endpoints.</p><p>This endpoint starts a video conference recording. A SIP address and account access to the video conference recording integration is required.</p>",
         "operationId": "startRecording",
         "x-sdk-method-name": "startVcRecording",
         "parameters": [
@@ -4898,7 +4898,7 @@
         ],
         "deprecated": true,
         "summary": "Get Video Report (Deprecated)",
-        "description": "This is a deprecated endpoint. Use <a href=/reference/postvideoreport>Get Video Report</a> instead.",
+        "description": "This is a deprecated endpoint. Use [Get Video Report](/reference/postvideoreport) instead.",
         "operationId": "getVideoReport",
         "parameters": [
           {
@@ -4964,7 +4964,7 @@
           "Videos"
         ],
         "summary": "Get Video Report",
-        "description": "This endpoint returns detailed viewing information for one or more videos. The report includes individual video viewing sessions, along with information on whether each user completed the video.<p>If video Ids are not specified in the call, the response includes data for every video in your Rev account. Maximum duration for a reporting period is 31 days.",
+        "description": "This endpoint returns detailed viewing information for one or more videos. The report includes individual video viewing sessions, along with information on whether each user completed the video.<p>If video Ids are not specified in the call, the response includes data for every video in your Vbrick account. Maximum duration for a reporting period is 31 days.",
         "operationId": "postVideoReport",
         "parameters": [
           {
@@ -5124,7 +5124,7 @@
           "Videos"
         ],
         "summary": "Migrate Video",
-        "description": "This endpoint is used during migrations to Rev from another system. During video import, you may want to retain the original uploader, upload date, and publish date. As a result, this API allows you to set only these fields to do so.<p>You can also use this endpoint to edit only these fields for previously added videos in the system if needed. This avoids the requirement of setting all fields when using other video editing endpoints.</p>",
+        "description": "This endpoint is used during migrations to Vbrick from another system. During video import, you may want to retain the original uploader, upload date, and publish date. As a result, this API allows you to set only these fields to do so.<p>You can also use this endpoint to edit only these fields for previously added videos in the system if needed. This avoids the requirement of setting all fields when using other video editing endpoints.</p>",
         "operationId": "migrateVideo",
         "x-sdk-method-name": "editVideoMigration",
         "parameters": [
@@ -5415,7 +5415,7 @@
           "Playlists"
         ],
         "summary": "Update Featured Playlist",
-        "description": "Edit the Rev Featured Playlist on the Home Page. You must have Account or Media Admin permissions.",
+        "description": "Edit the Vbrick Featured Playlist on the Home Page. You must have Account or Media Admin permissions.",
         "operationId": "editFeaturedPlaylist",
         "parameters": [
           {
@@ -5453,7 +5453,7 @@
         },
         "x-codegen-request-body-name": "editPlaylistMembers"
       }
-    },
+    },    
     "/api/v2/scheduled-events": {
       "get": {
         "tags": [
@@ -5591,7 +5591,7 @@
           "Webcasts"
         ],
         "summary": "Delete Webcasts By Custom Field or Date Range",
-        "description": "This endpoint deletes all events for a given date range or custom field query. The response returns a jobId and a count of webcasts to be deleted. The jobId can be used to check the <a href=/reference/getdeletewebcastsjobstatus>status</a> of the deletion.",
+        "description": "This endpoint deletes all events for a given date range or custom field query. The response returns a jobId and a count of webcasts to be deleted. The jobId can be used to check the [status](/reference/getdeletewebcastsjobstatus) of the deletion.",
         "operationId": "deleteEvents",
         "parameters": [
           {
@@ -5815,7 +5815,7 @@
           "Webcasts"
         ],
         "summary": "Patch Webcast",
-        "description": "Partially edits the details of a webcast. You do not need to provide the fields that you are not changing.<p>Webcast <strong>status</strong> determines which fields are modifiable and when. <p>If the webcast pre-production or main event is <strong>in progress</strong>, only fields available for inline editing may be patched/edited.</p><p>If the webcast main event has been run once, only fields available <strong>after</strong> the webcast has ended are available for editing. That includes <em>all</em> fields with the <em>exception</em> of start/end dates, lobbyTimeMinutes, preProduction, duration, userIds, and groupIds.</p><p>If the webcast <strong>end time</strong> has passed and is <strong>Completed</strong>, only edits to linkedVideoId and redirectVod are allowed.</p><p>Event Admins can be removed using their email addresses as path pointer for the fields 'EventAdminEmails' and 'EventAdmins', provided that all of the Event Admins associated with the webcast have email addresses. This is also applicable for the field 'Moderators'.</p><p>Keep in mind that Access Controls are strictly dictated by <a href=/docs/roles-and-permissions>Roles and Permissions.</a></p><p>Please refer to http://jsonpatch.com/ for the format of the request body.</p><strong>Examples:</strong><p>using EventAdmins: [{ 'op': 'remove', 'path': '/EventAdmins/Email', 'value': 'x1@test.com' }]</p><p>using EventAdminEmails: [{ 'op': 'remove', 'path': '/EventAdminEmails', 'value': 'x2@test.com' }]</p><p>using Moderators: [{ 'op': 'remove', 'path': '/Moderators/Email', 'value': 'x3@test.com' }]</p>",
+        "description": "Partially edits the details of a webcast. You do not need to provide the fields that you are not changing.<p>Webcast <strong>status</strong> determines which fields are modifiable and when. <p>If the webcast pre-production or main event is <strong>in progress</strong>, only fields available for inline editing may be patched/edited.</p><p>If the webcast main event has been run once, only fields available <strong>after</strong> the webcast has ended are available for editing. That includes <em>all</em> fields with the <em>exception</em> of start/end dates, lobbyTimeMinutes, preProduction, duration, userIds, and groupIds.</p><p>If the webcast <strong>end time</strong> has passed and is <strong>Completed</strong>, only edits to linkedVideoId and redirectVod are allowed.</p><p>Event Admins can be removed using their email addresses as path pointer for the fields 'EventAdminEmails' and 'EventAdmins', provided that all of the Event Admins associated with the webcast have email addresses. This is also applicable for the field 'Moderators'.</p><p>Keep in mind that Access Controls are strictly dictated by [Roles and Permissions.](/docs/roles-and-permissions)</p><p>Please refer to http://jsonpatch.com/ for the format of the request body.</p><strong>Examples:</strong><p>using EventAdmins: [{ 'op': 'remove', 'path': '/EventAdmins/Email', 'value': 'x1@test.com' }]</p><p>using EventAdminEmails: [{ 'op': 'remove', 'path': '/EventAdminEmails', 'value': 'x2@test.com' }]</p><p>using Moderators: [{ 'op': 'remove', 'path': '/Moderators/Email', 'value': 'x3@test.com' }]</p>",
         "operationId": "patchWebcast",
         "x-sdk-method-name": "patchEvent",
         "parameters": [
@@ -5920,7 +5920,6 @@
         ],
         "summary": "Get Public Webcast Status",
         "description": "Returns true if the webcast is Public or an unauthorized HTTP Status Code if it is Private for security reasons.",
-        "operationId": "verifyEventPublic",
         "x-sdk-method-name": "verifyEventPublic",
         "parameters": [
           {
@@ -5961,7 +5960,7 @@
           "Webcasts"
         ],
         "summary": "Get Delete Webcasts Job Status",
-        "description": "Get the status of the <a href=/reference/deleteevents>Delete Webcasts By Custom Field or Date Range</a> job.<p>Status states returned can be [Initialized, InProgress, Completed]",
+        "description": "Get the status of the [Delete Webcasts By Custom Field or Date Range](/reference/deleteevents) job.<p>Status states returned can be [Initialized, InProgress, Completed]",
         "operationId": "getDeleteWebcastsJobStatus",
         "x-sdk-method-name": "getDeleteEventsStatus",
         "parameters": [
@@ -5971,7 +5970,7 @@
           {
             "name": "jobId",
             "in": "path",
-            "description": "jobId returned in <a href=/reference/deleteevents>Delete Webcasts By Custom Field or Date Range</a> endpoint",
+            "description": "jobId returned in [Delete Webcasts By Custom Field or Date Range](/reference/deleteevents) endpoint",
             "required": true,
             "schema": {
               "type": "string"
@@ -6033,7 +6032,7 @@
                 "properties": {
                   "PresentationFile": {
                     "type": "string",
-                    "description": "Presentation file. Accepted file types include .ppt, .pptx. <p>Please provide Content-Type header for the uploaded files.</p>",
+                    "description": "Presentation file. Accepted file types include .ppt, .pptx, .pdf. <p>Please provide Content-Type header for the uploaded files.</p>",
                     "format": "binary"
                   }
                 }
@@ -6149,7 +6148,7 @@
           "Webcasts"
         ],
         "summary": "Upload Webcast Background Image",
-        "description": "Upload background image file for a webcast. Note that when you upload a background image Rev always scales it to fit the various screen sizes. When a background image is returned in a subsequent call, the available scale sizes available are also returned.",
+        "description": "Upload background image file for a webcast. Note that when you upload a background image Vbrick always scales it to fit the various screen sizes. When a background image is returned in a subsequent call, the available scale sizes available are also returned.",
         "operationId": "uploadBackgroundFile",
         "x-sdk-method-name": "uploadBackgroundImage",
         "parameters": [
@@ -6176,7 +6175,7 @@
                 "properties": {
                   "ImageFile": {
                     "type": "string",
-                    "description": "Background image file. View <a href=/docs/supported-file-types>Supported File Types</a> in Technical Requirements guide for accepted image types.<p>Please provide Content-Type header for the uploaded files.</p>",
+                    "description": "Background image file. View [Supported File Types](/docs/supported-file-types) in Technical Requirements guide for accepted image types.<p>Please provide Content-Type header for the uploaded files.</p>",
                     "format": "binary"
                   }
                 }
@@ -7038,7 +7037,7 @@
           {
             "name": "ip",
             "in": "query",
-            "description": "IP addresses of user/client with comma separated values (Example: <code>127.0.0.0</code>, <code>10.0.10.124</code>). This is used for <a href=/docs/manage-and-add-zones>Zoning rules</a> in determining the streams to return.",
+            "description": "IP addresses of user/client with comma separated values (Example: <code>127.0.0.0</code>, <code>10.0.10.124</code>). This is used for [Zoning rules](/docs/manage-and-add-zones) in determining the streams to return.",
             "schema": {
               "type": "string"
             }
@@ -7072,7 +7071,7 @@
           "Webcasts"
         ],
         "summary": "Start Webcast",
-        "description": "Starts a webcast. <p>If attempts to start an event that uses live subtitles when the account has no viewing hours. Returns 401 unauthorized error with response message, 'This event requires viewing hours. Please disable subtitles or contact your Rev Admin.'</p>",
+        "description": "Starts a webcast. <p>If attempts to start an event that uses live subtitles when the account has no viewing hours. Returns 401 unauthorized error with response message, 'This event requires viewing hours. Please disable subtitles or contact your Vbrick Admin.'</p>",
         "operationId": "startEvent",
         "parameters": [
           {
@@ -7269,7 +7268,7 @@
           "Webcasts"
         ],
         "summary": "Start Webcast Recording",
-        "description": "Start recording a webcast. <strong>Important:</strong> If <code>disableAutoRecording=false</code> in <a href=/reference/createevent>Create Webcast</a> and/or <a href=/reference/editevent>Update Webcast</a>, you cannot use this endpoint.  An error message is generated if you attempt to do so.",
+        "description": "Start recording a webcast. <strong>Important:</strong> If <code>disableAutoRecording=false</code> in [Create Webcast](/reference/createevent) and/or [Update Webcast](/reference/editevent), you cannot use this endpoint.  An error message is generated if you attempt to do so.",
         "operationId": "startRecordingEvent",
         "x-sdk-method-name": "startRecording",
         "parameters": [
@@ -7310,7 +7309,7 @@
           "Webcasts"
         ],
         "summary": "Stop Webcast Recording",
-        "description": "Stop recording a webcast. <strong>Important:</strong> If <code>disableAutoRecording=false</code> in <a href=/reference/createevent>Create Webcast</a> and/or <a href=/reference/editevent>Update Webcast</a>, you cannot use this endpoint.  An error message is generated if you attempt to do so.",
+        "description": "Stop recording a webcast. <strong>Important:</strong> If <code>disableAutoRecording=false</code> in [Create Webcast](/reference/createevent) and/or [Update Webcast](/reference/editevent), you cannot use this endpoint.  An error message is generated if you attempt to do so.",
         "operationId": "stopRecordingEvent",
         "x-sdk-method-name": "stopRecording",
         "parameters": [
@@ -7509,7 +7508,7 @@
         ],
         "deprecated": true,
         "summary": "Get Webcast Attendees Report (Deprecated)",
-        "description": "This is a deprecated endpoint.  Use <a href=/reference/getposteventsessions>Get Webcast Attendees Report</a> instead.",
+        "description": "This is a deprecated endpoint.  Use [Get Webcast Attendees Report](/reference/getposteventsessions) instead.",
         "operationId": "getEventReport",
         "x-sdk-ignore": true,
         "parameters": [
@@ -7846,7 +7845,7 @@
           "Webcasts"
         ],
         "summary": "Embed Webcast Engagement",
-        "description": "This API allows you to embed content or URLs from third-party sites of your choice so that they function in a Rev webcast.",
+        "description": "This API allows you to embed content or URLs from third-party sites of your choice so that they function in a Vbrick webcast.",
         "operationId": "createEmbeddedContentLink",
         "x-sdk-method-name": "createEmbeddedContentLink",
         "parameters": [
@@ -8073,7 +8072,7 @@
         ],
         "deprecated": true,
         "summary": "Get Push Links for a Webcast (Deprecated)",
-        "description": "This is a deprecated endpoint. Use <a href=/reference/getwebcastbanners>Get Banners for a Webcast</a> instead.",
+        "description": "This is a deprecated endpoint. Use [Get Banners for a Webcast](/reference/getwebcastbanners) instead.",
         "operationId": "getWebcastPushContentLinks",
         "x-sdk-method-name": "getPushContentLinks",
         "parameters": [
@@ -8119,7 +8118,7 @@
         ],
         "deprecated": true,
         "summary": "Add Push Links to a Webcast (Deprecated)",
-        "description": "This is a deprecated endpoint. Use <a href=/reference/createbanner>Add Banners to a Webcast</a> instead.",
+        "description": "This is a deprecated endpoint. Use [Add Banners to a Webcast](/reference/createbanner) instead.",
         "operationId": "createPushContentLink",
         "parameters": [
           {
@@ -8175,7 +8174,7 @@
         ],
         "deprecated": true,
         "summary": "Set Push Link Status (Deprecated)",
-        "description": "This is a deprecated endpoint. Use <a href=/reference/setbannerstatus>Set Banner Status</a> instead.",
+        "description": "This is a deprecated endpoint. Use [Set Banner Status](/reference/setbannerstatus) instead.",
         "operationId": "setPushContentLinkStatus",
         "x-sdk-method-name": "setPushContentLinkStatus",
         "parameters": [
@@ -8235,7 +8234,7 @@
         ],
         "deprecated": true,
         "summary": "Update Push Links for a Webcast (Deprecated)",
-        "description": "This is a deprecated endpoint. Use <a href=/reference/updatebanner>Update Banner for a Webcast</a> instead.",
+        "description": "This is a deprecated endpoint. Use [Update Banner for a Webcast](/reference/updatebanner) instead.",
         "operationId": "updatePushContentLink",
         "x-sdk-method-name": "editPushContentLink",
         "parameters": [
@@ -8299,7 +8298,7 @@
         ],
         "deprecated": true,
         "summary": "Delete a Push Link for a Webcast (Deprecated)",
-        "description": "This is a deprecated endpoint. Use <a href=/reference/deletewebcastbanner>Delete a Banner for a Webcast</a> instead.",
+        "description": "This is a deprecated endpoint. Use [Delete a Banner for a Webcast](/reference/deletewebcastbanner) instead.",
         "operationId": "deleteWebcastPushContentLink",
         "x-sdk-method-name": "deletePushContentLink",
         "parameters": [
@@ -8392,7 +8391,7 @@
           "Webcasts"
         ],
         "summary": "Add Banners to a Webcast",
-        "description": "This API allows you to add banners. Banners can be shown in a Rev webcast player at end of webcast or during a webcast in progress.",
+        "description": "This API allows you to add banners. Banners can be shown in a Vbrick webcast player at end of webcast or during a webcast in progress.",
         "operationId": "createBanner",
         "parameters": [
           {
@@ -9179,7 +9178,7 @@
                 "properties": {
                   "ImageFile": {
                     "type": "string",
-                    "description": "Thumbnail image file. Accepted image types are listed in <a href=/docs/supported-file-types>Supported File Types</a>.<p>Please provide Content-Type header for the uploaded files.</p>",
+                    "description": "Thumbnail image file. Accepted image types are listed in [Supported File Types](/docs/supported-file-types).<p>Please provide Content-Type header for the uploaded files.</p>",
                     "format": "binary"
                   }
                 }
@@ -9505,7 +9504,7 @@
           "Groups"
         ],
         "summary": "Patch Group",
-        "description": "Partially edits the details of a group. You do not need to provide the fields that you are not changing. For <strong>LDAP groups</strong>, only roles can be updated. For Rev system groups, <em>both</em> users and roles can be updated.<p>Please refer to http://jsonpatch.com/ for the format of the request body.</p><p><strong>Examples:</strong></p><p>To add users: [{ 'op': 'add', 'path': '/UserIds/-', 'value': '13443c6c-e2cc-49e2-b4b2-ec3ebad97fb1' }]</p><p>To add roles: [{ 'op': 'add', 'path': '/RoleIds/-', 'value': 'b14f6a56-254d-43ee-950b-145811ebfc8c' }]</p><p>To remove users: [{ 'op': 'remove', 'path': '/UserIds', 'value': 'b14f6a56-254d-43ee-950b-145811ebfc8c' }]</p><p>To remove roles: [{ 'op': 'remove', 'path': '/RoleIds', 'value': 'b14f6a56-254d-43ee-950b-145811ebfc8c' }]</p>",
+        "description": "Partially edits the details of a group. You do not need to provide the fields that you are not changing. For <strong>LDAP groups</strong>, only roles can be updated. For Vbrick system groups, <em>both</em> users and roles can be updated.<p>Please refer to http://jsonpatch.com/ for the format of the request body.</p><p><strong>Examples:</strong></p><p>To add users: [{ 'op': 'add', 'path': '/UserIds/-', 'value': '13443c6c-e2cc-49e2-b4b2-ec3ebad97fb1' }]</p><p>To add roles: [{ 'op': 'add', 'path': '/RoleIds/-', 'value': 'b14f6a56-254d-43ee-950b-145811ebfc8c' }]</p><p>To remove users: [{ 'op': 'remove', 'path': '/UserIds', 'value': 'b14f6a56-254d-43ee-950b-145811ebfc8c' }]</p><p>To remove roles: [{ 'op': 'remove', 'path': '/RoleIds', 'value': 'b14f6a56-254d-43ee-950b-145811ebfc8c' }]</p>",
         "operationId": "patchGroup",
         "parameters": [
           {
@@ -9617,7 +9616,7 @@
           "Groups"
         ],
         "summary": "Search Users,Groups and Channels",
-        "description": "Searches the specified access entity (user/group/channel) in Rev for a specified query string. If no entity is specified, then both are searched.",
+        "description": "Searches the specified access entity (user/group/channel) in Vbrick for a specified query string. If no entity is specified, then both are searched.",
         "operationId": "searchAccessEntity",
         "x-sdk-method-name": "search",
         "parameters": [
@@ -9690,7 +9689,7 @@
           "Channels"
         ],
         "summary": "Search assignable Users, Groups and Channels",
-        "description": "Searches the specified access entity (user/group/channel) in Rev for a specified query string that the current user is able to assign. If no entity is specified, then all types are searched.",
+        "description": "Searches the specified access entity (user/group/channel) in Vbrick for a specified query string that the current user is able to assign. If no entity is specified, then all types are searched.",
         "operationId": "searchAccessEntityAssignable",
         "x-sdk-method-name": "searchAssignable",
         "parameters": [
@@ -10371,7 +10370,7 @@
           {
             "name": "key",
             "in": "path",
-            "description": "File key of the channel logo to download.<p>This is the <b>logoKey</b> property that is returned via the <a href=/reference/getUserChannels>Get Channels For User</a> or <a href=/reference/getChannel>Get Channels</a> endpoints.</p>",
+            "description": "File key of the channel logo to download.<p>This is the <b>logoKey</b> property that is returned via the [Get Channels For User](/reference/getUserChannels) or [Get Channels](/reference/getChannel) endpoints.</p>",
             "required": true,
             "schema": {
               "type": "string"
@@ -10418,7 +10417,7 @@
           {
             "name": "key",
             "in": "path",
-            "description": "File key of the channel header image to download.<p>This is the <b>headerKey</b> property that is returned via the <a href=/reference/getuserchannels>Get Channels For User</a> or <a href=/reference/getchannels>Get Channels</a> endpoints.</p>",
+            "description": "File key of the channel header image to download.<p>This is the <b>headerKey</b> property that is returned via the [Get Channels For User](/reference/getuserchannels) or [Get Channels](/reference/getchannels) endpoints.</p>",
             "required": true,
             "schema": {
               "type": "string"
@@ -10482,7 +10481,7 @@
                 "properties": {
                   "ImageFile": {
                     "type": "string",
-                    "description": "Channel image file. View <a href=/docs/supported-file-types>Supported File Types</a> in Technical Requirements guide for accepted image types.<p>Please provide Content-Type header for the uploaded files.</p>",
+                    "description": "Channel image file. View [Supported File Types](/docs/supported-file-types) in Technical Requirements guide for accepted image types.<p>Please provide Content-Type header for the uploaded files.</p>",
                     "format": "binary"
                   }
                 }
@@ -10540,7 +10539,7 @@
                 "properties": {
                   "ImageFile": {
                     "type": "string",
-                    "description": "Channel image file. View <a href=/docs/supported-file-types>Supported File Types</a> in Technical Requirements guide for accepted image types.<p>Please provide Content-Type header for the uploaded files.</p>",
+                    "description": "Channel image file. View [Supported File Types](/docs/supported-file-types) in Technical Requirements guide for accepted image types.<p>Please provide Content-Type header for the uploaded files.</p>",
                     "format": "binary"
                   }
                 }
@@ -11199,7 +11198,7 @@
           "Administration"
         ],
         "summary": "Get Branding Settings",
-        "description": "Get the branding and style settings for a Rev entity.",
+        "description": "Get the branding and style settings for a Vbrick entity.",
         "operationId": "getBrandingSettings",
         "parameters": [
           {
@@ -11273,7 +11272,7 @@
           "Guest Registration"
         ],
         "summary": "Add Webcast Registration Fields",
-        "description": "Create webcast registration fields that can be used in Public webcasts. Used as a means to capture attendee details beyond name and email address when hosting Public events. <p>Use Ids returned in this endpoint in the <a href=/reference/createevent>Create Webcast</a> API to use a custom field.</p>",
+        "description": "Create webcast registration fields that can be used in Public webcasts. Used as a means to capture attendee details beyond name and email address when hosting Public events. <p>Use Ids returned in this endpoint in the [Create Webcast](/reference/createevent) API to use a custom field.</p>",
         "operationId": "createWebcastRegistrationField",
         "parameters": [
           {
@@ -11494,8 +11493,8 @@
         "x-sdk-tags": [
           "RevIQ"
         ],
-        "summary": "Get Rev IQ Credits Usage",
-        "description": "Returns the Rev IQ credits usage. Data for both video and live events is collected. Rev IQ credits are used for transcription, translation, user tagging, audio generation, and metadata generation.",
+        "summary": "Get Vbrick Video IQ Credits Usage",
+        "description": "Returns the Vbrick Video IQ credits usage. Data for both video and live events is collected. Vbrick Video IQ credits are used for transcription, translation, user tagging, audio generation, and metadata generation.",
         "operationId": "getAccountIqCreditsUsage",
         "parameters": [
           {
@@ -11513,21 +11512,21 @@
           {
             "name": "startDate",
             "in": "query",
-            "description": "Filter date for those recorded credits that happened on or after the WHEN field.",
+            "description": "Filter by date (ignoring any time component provided) to include only credits recorded on or after the value in the WHEN field.",
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date"
             }
           },
           {
             "name": "endDate",
             "in": "query",
-            "description": "Filter date for those recorded credits that happened on or before the WHEN field.",
+            "description": "Filter by date (ignoring any time component provided) to include only credits recorded on or before the value in the WHEN field.",
             "required": false,
             "schema": {
               "type": "string",
-              "format": "date-time"
+              "format": "date"
             }
           }
         ],
@@ -11572,7 +11571,7 @@
           "Administration"
         ],
         "summary": "Get Maintenance Schedule",
-        "description": "This endpoint returns Rev’s scheduled maintenance windows (by date/time) for the current year. Maintenance dates vary for the different Rev environments and need to be maintained by environment region (US, EU and AU).",
+        "description": "This endpoint returns Vbrick’s scheduled maintenance windows (by date/time) for the current year. Maintenance dates vary for the different Vbrick environments and need to be maintained by environment region (US, EU and AU).",
         "operationId": "maintenance-schedule",
         "x-sdk-method-name": "getMaintenanceSchedule",
         "parameters": [
@@ -11608,7 +11607,7 @@
           "Administration"
         ],
         "summary": "Get System Health",
-        "description": "This endpoint returns the status of Rev as shown on the Rev System Health page. The response should be a 200 OK unless there is a problem which is then displayed as a 5xx error.",
+        "description": "This endpoint returns the status of Vbrick as shown on the Vbrick System Health page. The response should be a 200 OK unless there is a problem which is then displayed as a 5xx error.",
         "operationId": "system-health",
         "x-sdk-method-name": "getSystemHealth",
         "parameters": [],
@@ -11896,7 +11895,7 @@
           "Devices"
         ],
         "summary": "Get DME Health Status",
-        "description": "This endpoint retrieves the last reported, complete health status of a DME. Each DME communicates a health status based on a frequency determined by Rev. Currently, this is every 60 seconds. Customers implementing longitudinal comparisons should periodically call this endpoint.",
+        "description": "This endpoint retrieves the last reported, complete health status of a DME. Each DME communicates a health status based on a frequency determined by Vbrick. Currently, this is every 60 seconds. Customers implementing longitudinal comparisons should periodically call this endpoint.",
         "operationId": "getDmeHealthStatus",
         "parameters": [
           {
@@ -12845,7 +12844,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "Rev Error name."
+            "description": "Vbrick Error name."
           },
           "detail": {
             "type": "string",
@@ -12877,7 +12876,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "Rev Error name."
+            "description": "Vbrick Error name."
           },
           "detail": {
             "type": "string",
@@ -13368,7 +13367,7 @@
             "type": "boolean"
           },
           "languageId": {
-            "description": "<a href=/docs/supported-languages#vod-voice-generation-language-support-for-rev-iq>Supported Language</a> code. When status is `adding`, languageId is required.<p>If status is `updating`, either languageId or isDefault should be different from the existing setting.</p>",
+            "description": "[Supported Language](/docs/supported-languages#vod-voice-generation-language-support-for-rev-iq) code. When status is `adding`, languageId is required.<p>If status is `updating`, either languageId or isDefault should be different from the existing setting.</p>",
             "type": "string"
           },
           "languageName": {
@@ -13386,7 +13385,7 @@
             "type": "integer"
           },
           "languageId": {
-            "description": "<a href=/docs/supported-languages#vod-voice-generation-language-support-for-rev-iq>Supported Language</a> code. When status is `adding`, languageId is required.<p>If status is `updating`, either languageId or isDefault should be different from the existing setting.</p>",
+            "description": "[Supported Language](/docs/supported-languages#vod-voice-generation-language-support-for-rev-iq) code. When status is `adding`, languageId is required.<p>If status is `updating`, either languageId or isDefault should be different from the existing setting.</p>",
             "type": "string"
           },
           "isDefault": {
@@ -13681,7 +13680,7 @@
           },
           "unlisted": {
             "type": "boolean",
-            "description": "Default=false. Specifies if the video is unlisted.  If unlisted, it is not visible or searchable in the Rev UI by other users.",
+            "description": "Default=false. Specifies if the video is unlisted.  If unlisted, it is not visible or searchable in the Vbrick UI by other users.",
             "default": false
           },
           "userTags": {
@@ -14049,7 +14048,7 @@
         "properties": {
           "userName": {
             "type": "string",
-            "description": "Used to login to Rev. Not case sensitive but must be unique."
+            "description": "Used to login to Vbrick. Not case sensitive but must be unique."
           },
           "firstName": {
             "type": "string",
@@ -14072,7 +14071,7 @@
           },
           "language": {
             "type": "string",
-            "description": "Preferred language. Two digit language code. For example, en for English. View <a href=/docs/supported-languages>Supported Languages</a> for codes."
+            "description": "Preferred language. Two digit language code. For example, en for English. View [Supported Languages](/docs/supported-languages) for codes."
           },
           "groupIds": {
             "type": "array",
@@ -14132,11 +14131,11 @@
         "properties": {
           "apiKey": {
             "type": "string",
-            "description": "Configured in the Rev client"
+            "description": "Configured in the Vbrick client"
           },
           "secret": {
             "type": "string",
-            "description": "Configured in the Rev client"
+            "description": "Configured in the Vbrick client"
           }
         }
       },
@@ -14703,7 +14702,7 @@
           },
           "language": {
             "type": "string",
-            "description": "View the latest <a href=/docs/supported-languages>Supported Languages</a> in Rev technical requirements.",
+            "description": "View the latest [Supported Languages](/docs/supported-languages) in Vbrick technical requirements.",
             "enum": [
               "en",
               "en-gb",
@@ -14737,7 +14736,7 @@
           },
           "transcriptionService": {
             "type": "string",
-            "description": "Type of transcription service to use by Rev for the video transcription.",
+            "description": "Type of transcription service to use by Vbrick for the video transcription.",
             "enum": [
               "Manual",
               "Vbrick"
@@ -14767,7 +14766,7 @@
       },
       "translationRequest": {
         "type": "object",
-        "description": "</br><p>View the latest <a href=/docs/supported-languages>Supported Languages</a> in Rev technical requirements for sourceLanguage and targetLanguages.</p>",
+        "description": "</br><p>View the latest [Supported Languages](/docs/supported-languages) in Vbrick technical requirements for sourceLanguage and targetLanguages.</p>",
         "properties": {
           "sourceLanguage": {
             "type": "string",
@@ -15083,15 +15082,15 @@
         "properties": {
           "userId": {
             "type": "string",
-            "description": "Rev UserId identifies the user the media is attached to. If the Id does not exist in Rev, the request is rejected."
+            "description": "Vbrick UserId identifies the user the media is attached to. If the Id does not exist in Vbrick, the request is rejected."
           },
           "username": {
             "type": "string",
-            "description": "Rev Username identifies the user the media is attached to. If the Username does not exist in Rev, the request is rejected."
+            "description": "Vbrick Username identifies the user the media is attached to. If the Username does not exist in Vbrick, the request is rejected."
           },
           "email": {
             "type": "string",
-            "description": "Rev Email identifies the user the media is attached to. If the Email does not exist in Rev, the request is rejected."
+            "description": "Vbrick Email identifies the user the media is attached to. If the Email does not exist in Vbrick, the request is rejected."
           }
         }
       },
@@ -15111,14 +15110,14 @@
           },
           "uploader": {
             "type": "string",
-            "description": "Rev username identifies the user the video is attached to. If not specified, or the username does not exist in Rev, the upload is rejected."
+            "description": "Vbrick username identifies the user the video is attached to. If not specified, or the username does not exist in Vbrick, the upload is rejected."
           },
           "owner": {
             "description": "By default, video owner is the user uploader unless otherwise assigned. The video owner automatically has view and edit rights and can include the Media Viewer role. <p>If a video owner is assigned, the uploader does <em>not</em> retain view/edit rights unless granted in video access controls.</p>",
             "$ref": "#/components/schemas/userAccessEntityRequest"
           },
           "categories": {
-            "description": "An array of category names attached to the video. If no categories are specified, or the category does not exist in Rev, no categories are attached. The request is also rejected if you do not have contribute rights to a restricted category and you attempt to add/edit or otherwise modify it. <p>This array is provided through the video metadata file and obtained through the <a href=/reference/getcategories>Get Categories</a> endpoint.</p><p>You should only use categories OR categoryIds but not both.</p>",
+            "description": "An array of category names attached to the video. If no categories are specified, or the category does not exist in Vbrick, no categories are attached. The request is also rejected if you do not have contribute rights to a restricted category and you attempt to add/edit or otherwise modify it. <p>This array is provided through the video metadata file and obtained through the [Get Categories](/reference/getcategories) endpoint.</p><p>You should only use categories OR categoryIds but not both.</p>",
             "type": "array",
             "items": {
               "type": "string"
@@ -15126,7 +15125,7 @@
           },
           "categoryIds": {
             "type": "array",
-            "description": "An array of category Ids attached to the video. If the category does not exist in Rev, the upload fails. The request is also rejected if you do not have contribute rights to a restricted category and you attempt to add/edit or otherwise modify it. <p>This array is provided through the video metadata file and obtained through the <a href=/reference/getcategories>Get Categories</a> endpoint.</p><p>You should only use categories OR categoryIds but not both.</p>",
+            "description": "An array of category Ids attached to the video. If the category does not exist in Vbrick, the upload fails. The request is also rejected if you do not have contribute rights to a restricted category and you attempt to add/edit or otherwise modify it. <p>This array is provided through the video metadata file and obtained through the [Get Categories](/reference/getcategories) endpoint.</p><p>You should only use categories OR categoryIds but not both.</p>",
             "items": {
               "type": "string"
             }
@@ -15148,7 +15147,7 @@
           },
           "enableDownloads": {
             "type": "boolean",
-            "description": "Default=false. This enables or disables downloading of the video from Rev."
+            "description": "Default=false. This enables or disables downloading of the video from Vbrick."
           },
           "enableComments": {
             "type": "boolean",
@@ -15177,7 +15176,7 @@
           },
           "customFields": {
             "type": "array",
-            "description": "An array of customFields attached to a video/webcast. If the customField does not exist in Rev or invalid values found for picklist, the upload fails. If values are not provided for a picklist and/or text field, they are not set for the video but the upload proceeds. The <a href=/reference/custommetadata>Get Custom Fields</a> endpoint retrieves a list of custom fields.<p>Note: If custom field is marked required in Rev, it <em>must</em> be provided in API call, otherwise it is optional. If it is required and not provided, the upload is rejected. Picklist types must be valid.</p>",
+            "description": "An array of customFields attached to a video/webcast. If the customField does not exist in Vbrick or invalid values found for picklist, the upload fails. If values are not provided for a picklist and/or text field, they are not set for the video but the upload proceeds. The [Get Custom Fields](/reference/custommetadata) endpoint retrieves a list of custom fields.<p>Note: If custom field is marked required in Vbrick, it <em>must</em> be provided in API call, otherwise it is optional. If it is required and not provided, the upload is rejected. Picklist types must be valid.</p>",
             "items": {
               "$ref": "#/components/schemas/customFieldRequest"
             }
@@ -15188,7 +15187,7 @@
           },
           "doNotTranscode": {
             "type": "boolean",
-            "description": "Default=false. This enables the video to bypass transcoding."
+            "description": "Default=false. This enables the video to bypass transcoding. Doesn't work with audio only files like mp3."
           },
           "is360": {
             "type": "boolean",
@@ -15227,11 +15226,11 @@
             "description": "Transcribe the video once the upload is complete.",
             "properties": {
               "transcribeLanguageId": {
-                "description": "Language code. View <a href=/docs/supported-languages>Supported Languages</a> for source languages in Technical Requirements.",
+                "description": "Language code. View [Supported Languages](/docs/supported-languages) for source languages in Technical Requirements.",
                 "type": "string"
               },
               "metadataGenerationFields": {
-                "description": "Creates AI-generated metadata for a given video based on the type specified. You must specify the field type you want to generate (description/title/tags/chapters). </br></br>This feature requires English transcription and must also be enabled for your Rev account.",
+                "description": "Creates AI-generated metadata for a given video based on the type specified. You must specify the field type you want to generate (description/title/tags/chapters). </br></br>This feature requires English transcription and must also be enabled for your Vbrick account.",
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -16195,7 +16194,7 @@
           },
           "macAddress": {
             "type": "string",
-            "description": "MAC address for the DME. Must be unique to the Rev account."
+            "description": "MAC address for the DME. Must be unique to the Vbrick account."
           },
           "isActive": {
             "type": "boolean",
@@ -16515,7 +16514,7 @@
           },
           "disableAutoRecording": {
             "type": "boolean",
-            "description": "Default=false. If false, the webcast is automatically recorded. <p>Note: When false, attempted use of the <a href=/reference/startrecordingevent>Start Webcast Recording</a> endpoint generates an error."
+            "description": "Default=false. If false, the webcast is automatically recorded. <p>Note: When false, attempted use of the [Start Webcast Recording](/reference/startrecordingevent) endpoint generates an error."
           },
           "hideShareUrl": {
             "type": "boolean"
@@ -16631,7 +16630,7 @@
       },
       "eventAccessControl": {
         "type": "string",
-        "description": "access control for the webcast. This is an enum and can have the following values: Public/TrustedPublic/AllUsers/Private.<p>Note: This parameter is strictly controlled by <a href=/docs/roles-and-permissions>Roles and Permissions</a>. TrustedPublic is only applicable for Partners and WebexEvents type webcasts.</p>",
+        "description": "access control for the webcast. This is an enum and can have the following values: Public/TrustedPublic/AllUsers/Private.<p>Note: This parameter is strictly controlled by [Roles and Permissions](/docs/roles-and-permissions). TrustedPublic is only applicable for Partners and WebexEvents type webcasts.</p>",
         "enum": [
           "Public",
           "TrustedPublic",
@@ -17017,15 +17016,15 @@
       },
       "liveSubtitles": {
         "type": "object",
-        "description": "For enabling live subtitles on the webcast. Enabling subtitles requires Rev IQ license hours and the Rev IQ User role.",
+        "description": "For enabling live subtitles on the webcast. Enabling subtitles requires Vbrick Video IQ license hours and the Vbrick Video IQ User role.",
         "properties": {
           "sourceLanguage": {
             "type": "string",
-            "description": "Language code. View <a href=/docs/supported-languages>Supported Languages</a> for source languages in Technical Requirements."
+            "description": "Language code. View [Supported Languages](/docs/supported-languages) for source languages in Technical Requirements."
           },
           "translationLanguages": {
             "type": "array",
-            "description": "Language code. View <a href=/docs/supported-languages>Supported Languages</a> for translation languages in Technical Requirements.",
+            "description": "Language code. View [Supported Languages](/docs/supported-languages) for translation languages in Technical Requirements.",
             "items": {
               "type": "string"
             }
@@ -17185,7 +17184,7 @@
           },
           "closedCaptionsEnabled": {
             "type": "boolean",
-            "description": "Default=false. Specifies if embedded closed captions in HLS video stream are enabled when Presentation Profile used as a video source. This is separate from the live subtitles (RevIQ) feature",
+            "description": "Default=false. Specifies if embedded closed captions in HLS video stream are enabled when Presentation Profile used as a video source. This is separate from the live subtitles (VbrickVideoIQ) feature",
             "default": false
           },
           "pollsEnabled": {
@@ -17299,7 +17298,7 @@
           },
           "unlisted": {
             "type": "boolean",
-            "description": "Default=false. Specifies if the webcast is unlisted. If it is unlisted, prevents it from being displayed to all Media Contributors, Media Viewers, and Event Hosts that did not create the Webcast. Further, resulting videos recorded are not visible or searchable in the Rev UI.",
+            "description": "Default=false. Specifies if the webcast is unlisted. If it is unlisted, prevents it from being displayed to all Media Contributors, Media Viewers, and Event Hosts that did not create the Webcast. Further, resulting videos recorded are not visible or searchable in the Vbrick UI.",
             "default": false
           },
           "estimatedAttendees": {
@@ -17315,7 +17314,7 @@
           },
           "shortcutName": {
             "type": "string",
-            "description": "Creates a custom event-friendly URL for a Webcast that makes it easier to remember for attendees. May be reused for multiple events as long as they do not conflict in date and time.<p>This Url is returned in the parameter shortcutNameUrl when the <a href=/reference/getevent>Get Webcast Details</a> endpoint is untilized."
+            "description": "Creates a custom event-friendly URL for a Webcast that makes it easier to remember for attendees. May be reused for multiple events as long as they do not conflict in date and time.<p>This Url is returned in the parameter shortcutNameUrl when the [Get Webcast Details](/reference/getevent) endpoint is untilized."
           },
           "linkedVideoId": {
             "type": "string",
@@ -17333,7 +17332,7 @@
           },
           "registrationFieldIds": {
             "type": "array",
-            "description": "If accessControl is set to Public, you can add custom fields to the Webcast to collect more data from public attendees. Use Ids returned in the <a href=/reference/createwebcastregistrationfield>Add Webcast Registration Fields</a> endpoint to specify the fields to use.",
+            "description": "If accessControl is set to Public, you can add custom fields to the Webcast to collect more data from public attendees. Use Ids returned in the [Add Webcast Registration Fields](/reference/createwebcastregistrationfield) endpoint to specify the fields to use.",
             "items": {
               "type": "string"
             }
@@ -17362,7 +17361,7 @@
           },
           "disableAutoRecording": {
             "type": "boolean",
-            "description": "Default=false. If false, the webcast is automatically recorded. <p>Note: When false, attempted use of the <a href=/reference/startrecordingevent>Start Webcast Recording</a> endpoint generates an error.",
+            "description": "Default=false. If false, the webcast is automatically recorded. <p>Note: When false, attempted use of the [Start Webcast Recording](/reference/startrecordingevent) endpoint generates an error.",
             "default": false
           },
           "hideShareUrl": {
@@ -17503,7 +17502,7 @@
       },
       "userAccessEntity": {
         "type": "object",
-        "description": "Array of users who are moderators. This is equivalent to Panelists in Webex.<p>Note: For Partners, auto creation of hosts/moderators occurs if user is not in Rev and new fields are used. This is only available for Account Admins. Email and lastName are required for user auto creation.</p>",
+        "description": "Array of users who are moderators. This is equivalent to Panelists in Webex.<p>Note: For Partners, auto creation of hosts/moderators occurs if user is not in Vbrick and new fields are used. This is only available for Account Admins. Email and lastName are required for user auto creation.</p>",
         "properties": {
           "email": {
             "type": "string"
@@ -17574,7 +17573,7 @@
       },
       "deleteEventsRequest": {
         "type": "object",
-        "description": "At least <em>one</em> of the parameters should be specified in the request. If all of the search terms are not provided in the request, a Bad Request response is returned by Rev.  If both the startDate and endDate search terms are not provided, they are defaulted to set a range equal to one year (i.e. 365 days).",
+        "description": "At least <em>one</em> of the parameters should be specified in the request. If all of the search terms are not provided in the request, a Bad Request response is returned by Vbrick.  If both the startDate and endDate search terms are not provided, they are defaulted to set a range equal to one year (i.e. 365 days).",
         "properties": {
           "startDate": {
             "type": "string",
@@ -18012,7 +18011,7 @@
           },
           "videoSourceType": {
             "type": "string",
-            "description": "This is an enum and can have the following values: <code>PresentationProfile, Rtmp, SipAddress, WebexTeam, WebexLiveStream, Zoom, Vod, Pexip, WebrtcSinglePresenter</code></br></br>Note that WebrtcSinglePresenter represents <i>Webcam and Screenshare</i> source in rev UI <p>This field is required to create/edit WebexLiveStream event.</p>"
+            "description": "This is an enum and can have the following values: <code>PresentationProfile, Rtmp, SipAddress, WebexTeam, WebexLiveStream, Zoom, Vod, Pexip, WebrtcSinglePresenter</code></br></br>Note that WebrtcSinglePresenter represents <i>Webcam and Screenshare</i> source in Vbrick UI <p>This field is required to create/edit WebexLiveStream event.</p>"
           },
           "rtmp": {
             "$ref": "#/components/schemas/eventRtmpInfo"
@@ -18063,7 +18062,7 @@
       },
       "searchEventsRequest": {
         "type": "object",
-        "description": "At least one of the parameters should be specified in the request. If all of the search terms are not provided in the request, a Bad Request response is returned by Rev.  If both the startDate and endDate search terms are not provided, they are defaulted to set a range equal to one year (i.e. 365 days).",
+        "description": "At least one of the parameters should be specified in the request. If all of the search terms are not provided in the request, a Bad Request response is returned by Vbrick.  If both the startDate and endDate search terms are not provided, they are defaulted to set a range equal to one year (i.e. 365 days).",
         "properties": {
           "scrollId": {
             "type": "string",
@@ -18297,7 +18296,7 @@
       },
       "webcastType": {
         "type": "string",
-        "description": "Scheduled event type used for integrations, default value is Rev.",
+        "description": "Scheduled event type used for integrations, default value is Vbrick ('Rev').",
         "enum": [
           "Rev",
           "WebexEvents"
@@ -18830,7 +18829,7 @@
           },
           "multicastErrorsPerAttendees": {
             "type": "integer"
-          }
+          }          
         }
       },
       "presentationProfileResponse": {
@@ -18894,7 +18893,7 @@
           },
           "userName": {
             "type": "string",
-            "description": "Username submitting the comment. This user must exist in Rev. Unless the user has been assigned the Account Admin role, this user must also match the authenticated user making the API call."
+            "description": "Username submitting the comment. This user must exist in Vbrick. Unless the user has been assigned the Account Admin role, this user must also match the authenticated user making the API call."
           }
         }
       },
@@ -18911,11 +18910,11 @@
           },
           "userName": {
             "type": "string",
-            "description": "Username of user submitting the comment. This user must exist in Rev. Only users with the Account Admin Role have the ability to specify a userName other than the currently authenticated user"
+            "description": "Username of user submitting the comment. This user must exist in Vbrick. Only users with the Account Admin Role have the ability to specify a userName other than the currently authenticated user"
           },
           "commentId": {
             "type": "string",
-            "description": "Target comment ID. Comments may be nested a single layer deep. If not specified or null then this comment will be added as a top-level comment. If commentId refers to a top-level comment then this comment will be added as a child. If commentId refers to a child comment then this comment will be added as a sibling instead of being further nested. This matches the behavior of Rev UI commenting",
+            "description": "Target comment ID. Comments may be nested a single layer deep. If not specified or null then this comment will be added as a top-level comment. If commentId refers to a top-level comment then this comment will be added as a child. If commentId refers to a child comment then this comment will be added as a sibling instead of being further nested. This matches the behavior of Vbrick UI commenting",
             "nullable": true
           }
         }
@@ -19195,7 +19194,7 @@
           },
           "apiKey": {
             "type": "string",
-            "description": "Configured in the Rev client"
+            "description": "Configured in the Vbrick client"
           },
           "grantType": {
             "type": "string",
@@ -19203,7 +19202,7 @@
           },
           "redirectUri": {
             "type": "string",
-            "description": "URL of web page to load after Rev credentials have been entered by the user. This page is where the final authentication steps will be performed and from which all subsequent API calls may be made. This value must be URL encoded."
+            "description": "URL of web page to load after Vbrick credentials have been entered by the user. This page is where the final authentication steps will be performed and from which all subsequent API calls may be made. This value must be URL encoded."
           },
           "refreshToken": {
             "type": "string",
@@ -19220,7 +19219,7 @@
           },
           "client_id": {
             "type": "string",
-            "description": "Client_id (apikey) Configured in the Rev client"
+            "description": "Client_id (apikey) Configured in the Vbrick client"
           },
           "grant_type": {
             "type": "string",
@@ -19228,7 +19227,7 @@
           },
           "redirect_uri": {
             "type": "string",
-            "description": "URL of web page to load after Rev credentials have been entered by the user. This page is where the final authentication steps will be performed and from which all subsequent API calls may be made. This value must be URL encoded."
+            "description": "URL of web page to load after Vbrick credentials have been entered by the user. This page is where the final authentication steps will be performed and from which all subsequent API calls may be made. This value must be URL encoded."
           },
           "refresh_token": {
             "type": "string",
@@ -19236,7 +19235,7 @@
           },
           "code_verifier": {
             "type": "string",
-            "description": "Applicable for initial request (grant_type=authorization_code). This is the original code_verifier that was signed and sent as the code_challenge in the authorize call. Rev will sign this using the same S256 algorithm and compare with the code_challenge received earlier to match. If it doesn't match, request for token will be denied."
+            "description": "Applicable for initial request (grant_type=authorization_code). This is the original code_verifier that was signed and sent as the code_challenge in the authorize call. Vbrick will sign this using the same S256 algorithm and compare with the code_challenge received earlier to match. If it doesn't match, request for token will be denied."
           }
         }
       },
@@ -19336,7 +19335,7 @@
           },
           "csrfToken": {
             "type": "string",
-            "description": "The CSRF token used by the Rev"
+            "description": "The CSRF token used by the Vbrick"
           },
           "language": {
             "type": "string",
@@ -19533,7 +19532,7 @@
       },
       "transcriptionFilesMetadataItem": {
         "type": "object",
-        "description": "Transcription files metadata object. Field name is TranscriptionFiles. <p>Only .srt or .vtt files should be uploaded.</p><p>View <a href=/docs/supported-languages>Supported Languages</a> in the Technical Requirements guide for ongoing updates and supported language codes.",
+        "description": "Transcription files metadata object. Field name is TranscriptionFiles. <p>Only .srt or .vtt files should be uploaded.</p><p>View [Supported Languages](/docs/supported-languages) in the Technical Requirements guide for ongoing updates and supported language codes.",
         "properties": {
           "fileName": {
             "type": "string",
@@ -19671,7 +19670,7 @@
           },
           "name": {
             "type": "string",
-            "description": "Name of the custom field in rev. If id is not provided, custom field is looked up by name."
+            "description": "Name of the custom field in Vbrick. If id is not provided, custom field is looked up by name."
           },
           "value": {
             "type": "string",
@@ -19735,7 +19734,7 @@
           "parentCategoryId": {
             "type": "string",
             "nullable": true,
-            "description": "Id of parent category to add the category as a child category. If specified, the Id needs to exist in Rev."
+            "description": "Id of parent category to add the category as a child category. If specified, the Id needs to exist in Vbrick."
           },
           "restricted": {
             "type": "boolean",
@@ -19763,7 +19762,7 @@
           "parentCategoryId": {
             "type": "string",
             "nullable": true,
-            "description": "Id of parent category to add the category as a child category. If empty will move category to top level. If specified, the Id needs to exist in Rev.",
+            "description": "Id of parent category to add the category as a child category. If empty will move category to top level. If specified, the Id needs to exist in Vbrick.",
             "default": null
           },
           "restricted": {
@@ -19852,22 +19851,22 @@
           },
           "uploader": {
             "type": "string",
-            "description": "This is the Rev username that identifies the user the video is attached to. If not specified, or the username does not exist in Rev, the link is rejected."
+            "description": "This is the Vbrick username that identifies the user the video is attached to. If not specified, or the username does not exist in Vbrick, the link is rejected."
           },
           "owner": {
-            "description": "Rev User the video is attached to. If the User does not exist in Rev, the request is rejected.",
+            "description": "Vbrick User the video is attached to. If the User does not exist in Vbrick, the request is rejected.",
             "$ref": "#/components/schemas/userAccessEntityRequest"
           },
           "categories": {
             "type": "array",
-            "description": "An array of category names that is attached to the video. If no categories are specified, or the category does not exist in Rev, it is not attached. This array is provided through the video metadata file and obtained through the <a href=/reference/getcategories>Get Categories</a> endpoint.<p>Note: You should only use category names OR categoryIds but <em>not</em> both.</p>",
+            "description": "An array of category names that is attached to the video. If no categories are specified, or the category does not exist in Vbrick, it is not attached. This array is provided through the video metadata file and obtained through the [Get Categories](/reference/getcategories) endpoint.<p>Note: You should only use category names OR categoryIds but <em>not</em> both.</p>",
             "items": {
               "type": "string"
             }
           },
           "categoryIds": {
             "type": "array",
-            "description": "An array of category Ids that is attached to the video. If the category does not exist in Rev, the upload will fail. This array is provided through the video metadata file and obtained through the <a href=/reference/getcategories>Get Categories</a> endpoint.<p>Note: You should only use category names OR categoryIds but <em>not</em> both.</p>",
+            "description": "An array of category Ids that is attached to the video. If the category does not exist in Vbrick, the upload will fail. This array is provided through the video metadata file and obtained through the [Get Categories](/reference/getcategories) endpoint.<p>Note: You should only use category names OR categoryIds but <em>not</em> both.</p>",
             "items": {
               "type": "string"
             }
@@ -19891,7 +19890,7 @@
           },
           "enableDownloads": {
             "type": "boolean",
-            "description": "Default=false. This enables or disables downloading of the video from Rev.",
+            "description": "Default=false. This enables or disables downloading of the video from Vbrick.",
             "default": false
           },
           "enableComments": {
@@ -19918,7 +19917,7 @@
           },
           "customFields": {
             "type": "array",
-            "description": "An array of customFields attached to a video/webcast. If the customField does not exist in Rev or invalid values found for picklist, the upload fails. If values are not provided for a picklist and/or text field, they are not set for the video but the upload proceeds. The <a href=/reference/custommetadata>Get Custom Fields</a> endpoint retrieves a list of custom fields.<p>Note: If custom field is marked required in Rev, it <em>must</em> be provided in API call, otherwise it is optional. If it is required and not provided, the upload is rejected. Picklist types must be valid.</p>",
+            "description": "An array of customFields attached to a video/webcast. If the customField does not exist in Vbrick or invalid values found for picklist, the upload fails. If values are not provided for a picklist and/or text field, they are not set for the video but the upload proceeds. The [Get Custom Fields](/reference/custommetadata) endpoint retrieves a list of custom fields.<p>Note: If custom field is marked required in Vbrick, it <em>must</em> be provided in API call, otherwise it is optional. If it is required and not provided, the upload is rejected. Picklist types must be valid.</p>",
             "items": {
               "$ref": "#/components/schemas/customFieldRequest"
             }
@@ -20181,7 +20180,7 @@
           },
           "revConnectEnabled": {
             "type": "boolean",
-            "description": "Designate the zone a Rev Connect zone"
+            "description": "Designate the zone a Vbrick ('Rev') Connect zone"
           },
           "revConnectSetting": {
             "$ref": "#/components/schemas/zoneRevConnectSetting"
@@ -20302,11 +20301,11 @@
       },
       "zoneRevConnectSetting": {
         "type": "object",
-        "description": "When revConnectEnabled, add or edit a Rev Connect Zone.",
+        "description": "When revConnectEnabled, add or edit a Vbrick ('Rev') Connect Zone.",
         "properties": {
           "disableFallback": {
             "type": "boolean",
-            "description": "Disables fallback to a unicast stream (if available) which means the zone only supports multicast or Rev Connect."
+            "description": "Disables fallback to a unicast stream (if available) which means the zone only supports multicast or Vbrick ('Rev') Connect."
           },
           "maxZoneMeshes": {
             "type": "integer",
@@ -20429,7 +20428,7 @@
           },
           "streams": {
             "type": "array",
-            "description": "Rev stream names added to the zone from this device",
+            "description": "Vbrick stream names added to the zone from this device",
             "items": {
               "type": "string"
             }
@@ -21187,15 +21186,15 @@
       },
       "registrationFieldAnswer": {
         "type": "object",
-        "description": "RegistrationFields used in webcast endpoints. If the registrationFields does not exist in Rev or invalid values are found for picklists, an error is returned. If values are not provided for a picklist and/or text field, they are not set (the endpoint proceeds).<p>Note: If a webcast registration field  is marked required in Rev, it <em>must</em> be provided in API call, otherwise it is optional. If it is required and not provided, the call is rejected. Picklist types must be valid.</p>",
+        "description": "RegistrationFields used in webcast endpoints. If the registrationFields does not exist in Vbrick or invalid values are found for picklists, an error is returned. If values are not provided for a picklist and/or text field, they are not set (the endpoint proceeds).<p>Note: If a webcast registration field  is marked required in Vbrick, it <em>must</em> be provided in API call, otherwise it is optional. If it is required and not provided, the call is rejected. Picklist types must be valid.</p>",
         "properties": {
           "id": {
             "type": "string",
-            "description": "Id of the registration field in Rev"
+            "description": "Id of the registration field in Vbrick"
           },
           "name": {
             "type": "string",
-            "description": "Name of the registration field in Rev"
+            "description": "Name of the registration field in Vbrick"
           },
           "value": {
             "type": "string",
